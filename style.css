@@ -4,6 +4,7 @@ body
 	background-image: url("img/prism.png");
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
+	color: white;
 }
 
 /*
@@ -16,12 +17,27 @@ p
 {
 	color: white;
 	text-align: center;
+	
+}
+
+.pLogin
+{
+	color: white;
+	text-align: center;
+	margin-top: 0;
 }
 
 .p-content
 {
 	color: white;
 	text-align: justify;
+}
+
+.p-input
+{
+	color: white;
+	text-align: left;
+	margin-top: 0;
 }
 
 .bo
@@ -46,7 +62,7 @@ h2
 {
 	font-size: 30px;
 	color: #ffffff;
-	margin-top: 50px;
+	margin-top: 20px;
 	
 }
 
@@ -54,7 +70,7 @@ h2
 {
 	width: 1420px;
 	background-color: #272020;	
-	min-height: 500px;
+	min-height: 300px;
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -127,6 +143,7 @@ h2
 {
 	width: 100%; 
 	display: flex;
+	margin-bottom: 10px;
 }
 
 .logIn
@@ -245,4 +262,83 @@ input.submit2[type=submit]:focus
 input.submit2[type=submit]:hover
 {
 	background-color: #9d741b;
+}
+
+textarea
+{
+	background-color: #f2f2f2;
+	color: #666;
+	padding:15px;
+	width: 250px;
+	resize: vertical;
+	margin-bottom:15px;
+	margin-top: 0;
+	margin-left: 10px;
+}
+
+textarea:focus
+{
+	box-shadow: 0px 0px 10px 2px rgba(9,26,45,0.4);
+	border-radius: 5px;
+	border: 2px solid #83AD2F;
+	background-color: #f5fbea;
+	color: #83AD2F;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=date]
+{
+	background-color: #f2f2f2;
+	color: #666;
+	width: 200px; 
+	height: 40px;
+	box-sizing: border-box;
+	margin-top: 0;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=date]:focus
+{
+	box-shadow: 0px 0px 10px 2px rgba(9,26,45,0.4);
+	border-radius: 5px;
+	border: 2px solid #83AD2F;
+	background-color: #f5fbea;
+	color: #83AD2F;
+}
+
+.labelInput
+{
+	width: 50px;
+}
+
+.divInput
+{
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.colText
+{
+	width: 80px;
+}
+
+.colInput
+{
+	width: 100px;
+}
+
+.divInputTextArea
+{
+	display: flex;
+	margin-top: 10px;
+}
+
+.inputsBody
+{
+	width: 400px;
+
 }

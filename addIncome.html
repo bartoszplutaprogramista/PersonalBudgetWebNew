@@ -10,8 +10,7 @@
 	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">	
 </head>
 
 <body>
@@ -40,16 +39,41 @@
 		</header>
 		<main>
 			<div class="content">
-				<h2>Aplikacja Budżet Osobisty</h2>
-				<p class="p-content">Budżet Osobisty pozwala na analizę tego jakie mamy przychody np. związane z wynagrodzeniem, stypendium itd. oraz ile pieniędzy wydajemy na poszczególne rzeczy: opłaty związane z mieszkaniem, kredytami, jedzeniem, rozrywką, remontami, wakacjami, ubezpieczeniami. Dzięki tej analizie łatwiej jest nam zaoszczędzić pieniądze na nowy cel. np samochód. </p>
+				<div class="inputsBody">
+					<div class="divInput">
+						<div class="colText">Kwota:</div>
+						<div class="colInput"><input type="text" value="" name="amount"></div>	
+					</div>
+					<div class="divInput">
+						<div class="colText"><p class="p-input">Data:</p></div>
+						<div class="colInput"><input type="date" name="date" id="theDate"></div>
+					</div>
 				
-				<h2>Jak działa Aplikacja Budżet Osobisty?</h2>
-				<p class="p-content">Mamy do wyboru 4 główne opcje w aplikacji: dodaj przychód (możemy dodać np.: wynagrodzenie, odsetki bankowe, sprzedaż na allegro), dodaj wydatek (mozemy dodać: sposób płatności: gotówką, kartą debetową, kartą kredytową w następującychj kategoriach: jedzenie, mieszkanie, transport, telekomunikacja, opieka zdrowotna itp.) przeglądaj bilans (tutaj zaprezentowane jest podsumowanie przychodów oraz wydatków w danym okresie dla danych kategorii)oraz ustawienia gdzie możemy zmienić: imię , adres e-mail lub hasło.</p>			
+					<div>
+						<label><input type="radio" name="categoryOfIncome" value="Wynagrodzenie">Wynagrodzenie</label>
+					</div>
+					<div>
+						<label><input type="radio" name="categoryOfIncome" value="Odsetki">Odsetki</label>
+					</div>	
+					<div>
+						<label><input type="radio" name="categoryOfIncome" value="Allegro">Allegro</label>
+					</div>
+				
+					<div>			
+						<label>	<input type="radio" name="categoryOfIncome" value="Inne">Inne</label>
+					</div>
+				
+					<div class="divInputTextArea">
+						<div>Komentarz (opcjonalnie):</div>
+						<div><textarea class="form-control" rows="1" name = "comment"></textarea></div>
+					</div>
+				</div>
 			</div>
 		</main>
 		
 		<footer>
 		</footer>
 	</article>
+	<script src="src/script.js"></script>
 </body>
 </html>
