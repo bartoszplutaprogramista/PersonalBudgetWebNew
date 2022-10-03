@@ -29,10 +29,16 @@
 			<ul class="menu">
 				<li><a href="personalBudget.html">Strona główna</a></li>
 				<li><a href="addIncome.html">Dodaj przychód</a></li>
-				<li><a href="#">Dodaj wydatek</a></li>
+				<li><a href="addExpense.html">Dodaj wydatek</a></li>
 				<li><a href="#">Przeglądaj bilans</a></li>
-				<li><a href="#">Ustawienia</a></li>
-				<li><a href="#">Wyloguj się</a></li>
+				<li><a href="#">Ustawienia</a>
+					<ol>
+						<li><a href="#">Zmień imię</a></li>
+						<li><a href="#">Zmień adres e-mail</a></li>
+						<li><a href="#">Zmień hasło</a></li>
+					</ol>
+				</li>
+				<li><a href="index.html">Wyloguj się</a></li>
 			</ul>
 		
 		</nav>
@@ -40,22 +46,24 @@
 		<main>
 			<div class="content">
 				<div class="inputsBody">
+				<h3>DODAJ PRZYCHÓD</h3>
 					<div class="divInput">
-						<div class="colText">Kwota:</div>
-						<div class="colInput"><input type="text" value="" name="amount"></div>	
+						<div class="colText"><p class="p-input"><label for="amount">Kwota:</label></p></div>
+						<div class="colInput"><input type="text" value="" name="amount" id="amount"></div>	
 					</div>
 					<div class="divInput">
-						<div class="colText"><p class="p-input">Data:</p></div>
-						<div class="colInput"><input type="date" name="date" id="theDate"></div>
+						<div class="colText"><p class="p-input"><label for="theDate">Data:</label></p></div>
+						<div class="colInput"><input type="date" name="theDate" id="theDate"></div>
 					</div>
-				
-					<div>
-						<label><input type="radio" name="categoryOfIncome" value="Wynagrodzenie">Wynagrodzenie</label>
+					
+					<p class="p-input-radio">Kategoria płatności:</p>
+					<div class="radio-gap">
+						<label><input type="radio" name="categoryOfIncome" value="Wynagrodzenie" checked ="checked">Wynagrodzenie</label>
 					</div>
-					<div>
+					<div class="radio-gap">
 						<label><input type="radio" name="categoryOfIncome" value="Odsetki">Odsetki</label>
 					</div>	
-					<div>
+					<div class="radio-gap">
 						<label><input type="radio" name="categoryOfIncome" value="Allegro">Allegro</label>
 					</div>
 				
@@ -64,9 +72,11 @@
 					</div>
 				
 					<div class="divInputTextArea">
-						<div>Komentarz (opcjonalnie):</div>
-						<div><textarea class="form-control" rows="1" name = "comment"></textarea></div>
+						<div><label for="commentOfIncome">Komentarz (opcjonalnie):</label></div>
+						<div><textarea class="form-control" rows="1" name = "commentOfIncome" id="commentOfIncome"></textarea></div>
 					</div>
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Zapisz"></a></div>	
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Anuluj"></a></div>	
 				</div>
 			</div>
 		</main>

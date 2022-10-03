@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>Budżet osobisty</title>
+	
+	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami" />
+	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">	
+</head>
+
+<body>
+
+
+	<article>
+		<header>
+<!--			<div class="topToLoginAndRegister"></div> !-->
+			<div class="topPersonalBudget">
+				<h1>BUDŻET OSOBISTY</h1>
+				<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+			</div>
+			
+		<nav id="topBar">
+		
+			<ul class="menu">
+				<li><a href="personalBudget.html">Strona główna</a></li>
+				<li><a href="addIncome.html">Dodaj przychód</a></li>
+				<li><a href="addExpense.html">Dodaj wydatek</a></li>
+				<li><a href="#">Przeglądaj bilans</a></li>
+				<li><a href="#">Ustawienia</a></li>
+				<li><a href="index.html">Wyloguj się</a></li>
+			</ul>
+		
+		</nav>
+		</header>
+		<main>
+			<div class="content">
+				<div class="inputsBody">
+					<h3>DODAJ WYDATEK</h3>
+					<div class="divInput">
+						<div class="colText"><p class="p-input"><label for="amount">Kwota:</label></p></div>
+						<div class="colInput"><input type="text" value="" name="amount" id="amount"></div>	
+					</div>
+					<div class="divInput">
+						<div class="colText"><p class="p-input"><label for="theDate">Data:</label></p></div>
+						<div class="colInput"><input type="date" name="theDate" id="theDate"></div>
+					</div>
+					
+					<p class="p-input-radio">Sposób płatności:</p>
+					<div class="radio-gap">
+						<label><input type="radio" name="paymentMethod" value="Gotówka">Gotówka</label>
+					</div>
+					<div class="radio-gap">
+						<label><input type="radio" name="paymentMethod" value="Karta debetowa" checked ="checked">Karta debetowa</label>
+					</div>	
+					<div class="radio-gap">
+						<label><input type="radio" name="paymentMethod" value="Karta kredytowa">Karta kredytowa</label>
+					</div>
+				
+					<p class="p-input-radio">Kategoria płatności:</p>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Jedzenie" checked ="checked">Jedzenie</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Mieszkanie">Mieszkanie</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Transport">Transport</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Telekomunikacja">Telekomunikacja</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Opieka zdrowotna">Opieka zdrowotna</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Ubranie">Ubranie</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Higiena">Higiena</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Dzieci">Dzieci</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Rozrywka">Rozrywka</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Wycieczka">Wycieczka</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Szkolenia">Szkolenia</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Książki">Książki</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Oszczędności">Oszczędności</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Na złotą jesień, czyli emeryturę">Na złotą jesień, czyli emeryturę</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Spłata długów">Spłata długów</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Darowizna">Darowizna</label>
+					</div>
+					<div class="radio-gap">			
+						<label>	<input type="radio" name="categoryOfExpense" value="Inne">Inne</label>
+					</div>
+				
+					<div class="divInputTextArea">
+						<div><label for="commentOfExpense">Komentarz (opcjonalnie):</div>
+						<div><textarea class="form-control" rows="1" name = "commentOfExpense" id="commentOfExpense"></textarea></div>
+					</div>
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Dodaj"></a></div>	
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Anuluj"></a></div>	
+				</div>
+			</div>
+		</main>
+		
+		<footer>
+		</footer>
+	</article>
+	<script src="src/script.js"></script>
+</body>
+</html>

@@ -40,6 +40,15 @@ p
 	margin-top: 0;
 }
 
+.p-input-radio
+{
+	color: white;
+	font-weight: bold;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 .bo
 {
 	color: #ffffff;
@@ -63,6 +72,17 @@ h2
 	font-size: 30px;
 	color: #ffffff;
 	margin-top: 20px;
+	
+}
+
+h3
+{
+	font-size: 30px;
+	color: #ffffff;
+	margin-top: 0;
+	margin-bottom: 20px;
+	text-align: center;
+	
 	
 }
 
@@ -340,5 +360,38 @@ input[type=date]:focus
 .inputsBody
 {
 	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
 
+}
+
+.radio-gap 
+{
+	margin-bottom: 5px;
+}
+
+.menu > li > ol 
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	height: 40px;
+	display: none;
+}
+
+.menu > li > ol > li
+{
+	background-color:#cf6969;
+	position: relative;
+	z-index: 100; 
+	border-top: 1px dashed #751b1b;
+}
+
+.menu > li:hover > ol
+{
+	display: block;
+}
+ul > li > ol > li:hover
+{
+	background-color: #c34f4f;
 }
