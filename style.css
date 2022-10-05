@@ -1,6 +1,6 @@
 body
 {
-	/* Background pattern from subtlepatterns.com */
+	/* Background pattern from https://www.toptal.com/designers/subtlepatterns/ */
 	background-image: url("img/prism.png");
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
@@ -341,7 +341,7 @@ input[type=date]:focus
 	margin-bottom: 5px;
 }
 
-.menu
+ul
 {
 	height: 35px;
 	line-height: 200%;
@@ -349,36 +349,64 @@ input[type=date]:focus
 	display: flex;
 }
 
-.menu a
+ul a
 {
 	color: #fff;
 	text-decoration: none;
 	display: block;
 }
 
-.menu a:hover
+ul a:hover
 {
-	color: #b9b9b9;
+	/*
+	color: #b9b9b9; */
+	color: #000000;
 }
 
-.menu > li
+/* 
+.menu > li > .expand-the-menu-li 
 {
-	padding-left: 20px;
-	padding-right: 20px;
+	width: 200px;
+	padding: 0;
+} */
+
+ul > li > ol > li > a
+{
+	color: #fff;
+}
+
+ul > li > ol > li > a:hover
+{
+	color: #fff;
+}
+
+ul > li
+{
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 200px;
+	height: 40px;
+	text-align: center;
 	border-right: 1px dashed #fff;
+	margin-bottom: 0;
 }
 
-.menu > li:first-child
+ul > li:hover
+{
+	background-color: #797979;
+}
+
+ul > li:first-child
 {
 	border-left: 1px dashed #fff;
 }
-.menu > li:last-child
+ul > li:last-child
 {
 	border-left: 1px dashed #fff;
-	margin-left: 300px; 
+	margin-left: 170px; 
 }
 
-.menu > li > ol 
+ul > li > ol 
 {
 	list-style-type: none;
 	padding: 0;
@@ -387,27 +415,37 @@ input[type=date]:focus
 	display: none; 
 }
 
-.menu > li > ol > li
+ul > li > ol > li
 {
 	background-color:#353535;
 	position: relative;
-	z-index: 100; 
+	z-index: 100;  
 	border-top: 1px dashed #fff;
+	width: 200px;
+	padding: 0;
+	margin: 0;
+}
+ul > li > ol > li:last-child
+{
+	border-bottom: 1px dashed #fff;
 }
 
 
-.menu > li:hover > ol
+
+ul > li:hover > ol
 {
-	display: block;
-} 
+	display: flex;
+	flex-direction: column;
+}  
 
 ul > li > ol > li:hover
 {
 	background-color: #131313;
 }
 
+/*
 .gap
 {
 	width: 150px;
 	text-align: center;
-}
+}  */
