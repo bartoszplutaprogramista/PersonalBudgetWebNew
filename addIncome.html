@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>Budżet osobisty</title>
+	
+	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami" />
+	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">	
+</head>
+
+<body>
+
+
+	<article>
+		<header>
+<!--			<div class="topToLoginAndRegister"></div> !-->
+			<div class="top-personal-budget">
+				<h1>BUDŻET OSOBISTY</h1>
+				<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+			</div>
+			
+		<nav id="top-bar">
+		
+			<ul>
+				<li><a href="personalBudget.html">Strona główna</a></li>
+				<li><a href="addIncome.html">Dodaj przychód</a></li>
+				<li><a href="addExpense.html">Dodaj wydatek</a></li>
+				<li><a href="browseTheBalance.html">Przeglądaj bilans</a></li>
+				<li class="gap"><a href="#">Ustawienia</a>
+					<ol>
+						<li><a href="#">Zmień adres e-mail</a></li>
+						<li><a href="#">Zmień hasło</a></li>
+					</ol>
+				</li>
+				<li><a href="index.html">Wyloguj się</a></li>
+			</ul>
+		
+		</nav>
+		</header>
+		<main>
+			<div class="content">
+				<div class="inputs-body">
+				<h3>DODAJ PRZYCHÓD</h3>
+					<div class="divInput">
+						<div class="col-text"><p class="p-input"><label for="amount">Kwota:</label></p></div>
+						<div class="col-input"><input type="text" value="" name="amount" id="amount"></div>	
+					</div>
+					<div class="divInput">
+						<div class="col-text"><p class="p-input"><label for="theDate">Data:</label></p></div>
+						<div class="col-input"><input type="date" name="theDate" id="theDate"></div>
+					</div>
+					
+					<p class="p-input-radio">Kategoria płatności:</p>
+					<div class="radio-gap">
+						<label><input type="radio" name="categoryOfIncome" value="Wynagrodzenie" checked ="checked">Wynagrodzenie</label>
+					</div>
+					<div class="radio-gap">
+						<label><input type="radio" name="categoryOfIncome" value="Odsetki">Odsetki</label>
+					</div>	
+					<div class="radio-gap">
+						<label><input type="radio" name="categoryOfIncome" value="Allegro">Allegro</label>
+					</div>
+				
+					<div>			
+						<label>	<input type="radio" name="categoryOfIncome" value="Inne">Inne</label>
+					</div>
+				
+					<div class="div-input-text-area">
+						<div><label for="commentOfIncome">Komentarz (opcjonalnie):</label></div>
+						<div><textarea class="form-control" rows="1" name = "commentOfIncome" id="commentOfIncome"></textarea></div>
+					</div>
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Dodaj"></a></div>	
+					<div class="submit"><a href="#"><input class="submit2" type="submit" value="Anuluj"></a></div>	
+				</div>
+			</div>
+		</main>
+		
+		<footer>
+			<div class="bottom-content">
+				<p>Wszelkie prawa zastrzeżone &copy; 2022 Dziękuję za wizytę!</p>
+			</div>
+		</footer>
+	</article>
+	<script src="src/script.js"></script>
+</body>
+</html>
