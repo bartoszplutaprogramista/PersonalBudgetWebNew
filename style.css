@@ -11,6 +11,12 @@ p
 {
 	color: white;
 	text-align: center;
+	margin: 0;
+}
+
+.set-margin
+{
+	margin: 0 auto;
 }
 
 .p-login
@@ -105,25 +111,15 @@ h3
 
 .top
 {
-	width: 800px;
-	border: 1px solid #ccc;
+	border: 2px solid #ccc;
 	border-radius: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 200px;
 }
 
 .bottom
 {
-	width: 760px;
-	padding: 20px;
 	background-color: #333333;
-	border: 1px solid #fff;
+	border: 2px solid #fff;
 	border-radius:15px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	
 }
 
 .bottom-content
@@ -155,6 +151,11 @@ h3
 	margin-bottom: 10px;
 }
 
+.border-size
+{
+	border: 1px;
+}
+
 .log-in
 {
 	margin-top: 20px;
@@ -166,17 +167,16 @@ h3
 
 .log-in-or-register
 {
-	min-height: 300px;
-	width: 389px;
-	border: 1px solid #ccc; 
-	border-radius: 30px;
+	border-right: 2px solid #ccc; 
 }
 
+/*
 .log-in-or-register:first-child
 {
 	margin-right: 20px;
-}
+} */
 
+/*
 input[type=text],
 input[type=password]
 {
@@ -211,6 +211,7 @@ input[type=submit]
 	color: white;
 	padding: 15px 10px;
 	margin-top: 20px;
+	margin-bottom: 20px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -228,7 +229,7 @@ input[type=submit]:focus
 input[type=submit]:hover
 {
 	background-color: #37b93d;
-}
+} */
 
 .col-1
 {
@@ -237,7 +238,7 @@ input[type=submit]:hover
 
 .col-2
 {
-	width: 80%;
+	width: 50%;
 }
 
 .submit
@@ -246,6 +247,7 @@ input[type=submit]:hover
 	text-align: center;
 }
 
+/*
 input.submit2[type=submit]
 {
 	width: 300px;
@@ -317,7 +319,7 @@ input[type=date]:focus
 	border: 2px solid #83AD2F;
 	background-color: #f5fbea;
 	color: #83AD2F;
-}
+} */
 
 .div-input
 {
@@ -476,5 +478,37 @@ ul > li > ol > li:hover
 	background-color: #131313;
 }
 
+@media (min-width: 1900px)
+{
+	.col-xxl-3 
+	{
+		flex: 0 0 auto;
+		width: 18%;
+	}
+}
 
+@media (min-width: 2200px)
+{
+	.col-xxl-3 
+	{
+		flex: 0 0 auto;
+		width: 15%;
+	}
+}
+
+@media (min-width: 721px) and (max-width: 991px)
+{
+	.w-75 
+	{
+		width: 25% !important;
+	}
+}
+
+@media (max-width: 720px)
+{
+	.w-75 
+	{
+		width: 50% !important;
+	}
+}
 
