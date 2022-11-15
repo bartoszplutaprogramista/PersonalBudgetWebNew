@@ -5,7 +5,78 @@ body
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
 	color: white;
+	margin: 0 !important;
 }
+
+.balance-width
+{
+	width: 33.33%;
+}
+
+.div-balance-buttons
+{
+	width: 50%;
+}
+
+.div-form-buttons
+{
+	width: 250px;
+}
+
+.mt-neg
+{
+	margin-top: -0.05rem !important;
+}
+
+.text-light:hover {
+  color: #000000 !important;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.dropdown-menu-dark .dropdown-item:hover, .dropdown-menu-dark .dropdown-item:focus {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.dropdown-my-color:hover
+{
+	background-color: #909090;
+}
+
+.li-change-color:hover
+{
+	background-color: #909090;	
+}
+
+.li-change-color:active
+{
+	background-color: #202020;	
+}
+
+.dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
+  color: #fff;
+  background-color: #202020;
+}
+
+.dropdown-menu-dark
+{
+	color: #dee2e6;
+	background-color: #140303;
+	border-color: rgba(0, 0, 0, 0.15);
+}
+
+.container-fluid
+{
+	margin: 0;
+	padding: 0;
+} 
 
 p
 {
@@ -42,10 +113,11 @@ p
 .p-input-radio
 {
 	color: white;
-	font-weight: bold;
 	text-align: left;
+
+/*
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 10px; */
 }
 
 .bo
@@ -66,14 +138,6 @@ h1
 	margin-bottom: 0;
 }
 
-h2
-{
-	font-size: 30px;
-	color: #ffffff;
-	margin-top: 20px;
-	
-}
-
 h3
 {
 	font-size: 30px;
@@ -81,32 +145,20 @@ h3
 	margin-top: 0;
 	margin-bottom: 20px;
 	text-align: center;
-	
-	
+	font-weight: bold;
 }
 
 .content 
 {
-	width: 1420px;
 	background-color: #272020;	
 	min-height: 300px;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 30px 40px;
 	border-radius: 15px;
 }
 
-#top-bar
+.top-bar
 {
-	width: 1494px;
 	background-color: #140303;
-	min-height: 50px;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
 	border-radius: 15px;
-	border: 3px solid #000;
 }
 
 .top
@@ -170,67 +222,6 @@ h3
 	border-right: 2px solid #ccc; 
 }
 
-/*
-.log-in-or-register:first-child
-{
-	margin-right: 20px;
-} */
-
-/*
-input[type=text],
-input[type=password]
-{
-	width: 300px;
-	background-color: #efefef;
-	color: #666;
-	border: 2px solid #ddd;
-	border-radius: 5px;
-	font-size: 20px;
-	padding: 10px;
-	box-sizing: border-box;
-	outline: none;
-	margin-top: 10px;
-}
-
-input[type=text]:focus,
-input[type=password]:focus
-{
-	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	border: 2px solid #a5cda5;
-	background-color: #e9f3e9;
-	color: #428c42;
-}
-
-input[type=submit]
-{
-	width: 300px;
-	background-color: #36b03c;
-	font-size:20px;
-	color: white;
-	padding: 15px 10px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	letter-spacing: 2px;
-	outline: none;
-}
-
-input[type=submit]:focus
-{
-	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-	-moz-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-}
-
-input[type=submit]:hover
-{
-	background-color: #37b93d;
-} */
-
 .col-1
 {
 	width: 20%;
@@ -241,85 +232,17 @@ input[type=submit]:hover
 	width: 50%;
 }
 
+.submit2
+{
+/*	text-align: center; */
+	margin-left: 10px;
+}
+
 .submit
 {
 	width: 100%;
 	text-align: center;
 }
-
-/*
-input.submit2[type=submit]
-{
-	width: 300px;
-	background-color: #8c630a;
-	font-size:20px;
-	color: white;
-	padding: 15px 10px;
-	margin-top: 20px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	letter-spacing: 2px;
-	outline: none;
-}
-
-input.submit2[type=submit]:focus
-{
-	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-	-moz-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
-}
-
-input.submit2[type=submit]:hover
-{
-	background-color: #9d741b;
-}
-
-textarea
-{
-	background-color: #f2f2f2;
-	color: #666;
-	padding:15px;
-	width: 250px;
-	resize: vertical;
-	margin-bottom:15px;
-	margin-top: 0;
-	margin-left: 10px;
-}
-
-textarea:focus
-{
-	box-shadow: 0px 0px 10px 2px rgba(9,26,45,0.4);
-	border-radius: 5px;
-	border: 2px solid #83AD2F;
-	background-color: #f5fbea;
-	color: #83AD2F;
-}
-
-input[type=text],
-input[type=email],
-input[type=password],
-input[type=date]
-{
-	background-color: #f2f2f2;
-	color: #666;
-	width: 200px; 
-	height: 40px;
-	box-sizing: border-box;
-	margin-top: 0;
-}
-
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=password]:focus,
-input[type=date]:focus
-{
-	box-shadow: 0px 0px 10px 2px rgba(9,26,45,0.4);
-	border-radius: 5px;
-	border: 2px solid #83AD2F;
-	background-color: #f5fbea;
-	color: #83AD2F;
-} */
 
 .div-input
 {
@@ -385,99 +308,6 @@ input[type=date]:focus
 	margin-bottom: 5px;
 }
 
-ul
-{
-	height: 35px;
-	line-height: 200%;
-	list-style-type: none;
-	display: flex;
-}
-
-ul a
-{
-	color: #fff;
-	text-decoration: none;
-	display: block;
-}
-
-ul a:hover
-{
-	color: #000000;
-}
-
-ul > li > ol > li > a
-{
-	color: #fff;
-}
-
-ul > li > ol > li > a:hover
-{
-	color: #fff;
-}
-
-ul > li
-{
-	padding-left: 0px;
-	padding-right: 0px;
-	width: 200px;
-	height: 40px;
-	text-align: center;
-	border-right: 1px dashed #fff;
-	margin-bottom: 0;
-}
-
-ul > li:hover
-{
-	background-color: #797979;
-}
-
-ul > li:first-child
-{
-	border-left: 1px dashed #fff;
-}
-ul > li:last-child
-{
-	border-left: 1px dashed #fff;
-	margin-left: 170px; 
-}
-
-ul > li > ol 
-{
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	height: 40px;
-	display: none; 
-}
-
-ul > li > ol > li
-{
-	background-color:#353535;
-	position: relative;
-	z-index: 100;  
-	border-top: 1px dashed #fff;
-	width: 200px;
-	padding: 0;
-	margin: 0;
-}
-ul > li > ol > li:last-child
-{
-	border-bottom: 1px dashed #fff;
-}
-
-
-
-ul > li:hover > ol
-{
-	display: flex;
-	flex-direction: column;
-}  
-
-ul > li > ol > li:hover
-{
-	background-color: #131313;
-}
-
 @media (min-width: 1900px)
 {
 	.col-xxl-3 
@@ -485,6 +315,10 @@ ul > li > ol > li:hover
 		flex: 0 0 auto;
 		width: 18%;
 	}
+	.col-xxl-8 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
 }
 
 @media (min-width: 2200px)
@@ -509,6 +343,15 @@ ul > li > ol > li:hover
 	.w-75 
 	{
 		width: 50% !important;
+	}
+}
+
+@media (max-width: 991px)
+{
+	.padding-991 
+	{
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 }
 

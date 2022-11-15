@@ -1,62 +1,75 @@
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<title>Budżet osobisty</title>
 	
-	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami" />
-	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami" />
-	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
+	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami">
+	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">	
 </head>
 
 <body>
 
 
-	<article>
 		<header>
-<!--			<div class="topToLoginAndRegister"></div> !-->
-			<div class="top">
-				<h1>BUDŻET OSOBISTY</h1>
-				<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+			<div class="row justify-content-center">
+				<div class="col-sm-12 col-lg-6 p-4 mt-5">
+					<h1>BUDŻET OSOBISTY</h1>
+					<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+				</div>
 			</div>
 		</header>
 		<main>
-			<div class="log-in">  
-				<div class="log-in-or-register">
-					<p> Masz już konto? </p>
-					<div class="columns100"> 
-						<div class="col-1"><p class="p-login"> Login</p></div> <div class="col-2"><input type="text" name="login" placeholder="Podaj hasło"></div>
-					</div> 
-					<div class="columns100"> 
-						<div class="col-1"><p class="p-login"> Hasło</p></div> <div class="col-2"><input type="password" name="haslo" placeholder="Podaj hasło"></div>
-					</div> 
-					<div class="submit"><a href="personalBudget.html"><input type="submit" value="Zaloguj się"></a></div>
-				</div>
-				<div class="log-in-or-register">
-					<p> Nie masz jeszcze konta? </p>
-					<div class="columns100"> 
-						<div class="col-1"><p class="p-login"> Login</p></div> <div class="col-2"><input type="text" name="login" placeholder="Podaj nowy login"></div>
-					</div> 
-					<div class="columns100">  
-						<div class="col-1"><p class="p-login"> Hasło</p></div> <div class="col-2"><input type="password" name="haslo" placeholder="Podaj nowe hasło"></div>
+			<article>
+				<div class="row justify-content-center">
+					<div class="col-sm-12 col-lg-4 col-xxl-3 log-in-or-register mt-3">
+						<form action="personalBudget.html" method="post">
+							<p class="p-2"> Masz już konto? </p>
+							<div class="input-group mb-3 w-75 set-margin">
+								  <input type="text" class="form-control" placeholder="Podaj login" aria-label="username" required />
+							</div>	
+							<div class="input-group mb-3 w-75 set-margin">
+								  <input type="password" class="form-control" placeholder="Podaj hasło" aria-label="password" required />
+							</div>
+							
+					<!--		<div class="submit"><button type="button" onclick="document.location='personalBudget.html'" class="btn btn-warning ">Zaloguj się</button></div>!-->
+							<div class="submit"><input class="btn btn-warning" type="submit" value="Zaloguj się"></div>
+						</form>
 					</div>
-					<div class="submit"><a href="personalBudget.html"><input class="submit2" type="submit" value="Zarejestruj się"></a></div>		
-				</div>
-			</div> 
+					<div class="col-sm-12 col-lg-4 col-xxl-3 mt-3">
+						<form action="personalBudget.html" method="post">
+							<p class="p-2"> Nie masz jeszcze konta? </p>
+							<div class="input-group mb-3 w-75 set-margin">
+								  <input type="text" class="form-control" placeholder="Podaj nowy login" aria-label="newUsername" required />
+							</div>	
+							<div class="input-group mb-3 w-75 set-margin">
+								  <input type="password" class="form-control" placeholder="Podaj nowe hasło" aria-label="newPassword" required />
+							</div>
+							<div class="input-group mb-3 w-75 set-margin">
+								  <input type="password" class="form-control" placeholder="Powtórz nowe hasło" aria-label="newPassword2" required />
+							</div>
+							<div class="submit"><button type="submit" class="btn btn-success ">Zarejestruj się</button></div>	
+					<!--		<div class="submit"><input class="btn btn-success" type="submit" value="Zarejestruj się"></div>	!-->
+						</form>
+					</div>
+				</div> 
+			</article>
 		</main>
 		
 		<footer>
-			<div class="bottom">
-				<p>Wszelkie prawa zastrzeżone &copy; 2022 Dziękuję za wizytę!</p>
+			<div class="row justify-content-center">
+				
+				<div class="col-sm-12 col-lg-6 p-4 mt-3"> <!--p-3!-->
+					<p>Wszelkie prawa zastrzeżone &copy; 2022 Dziękuję za wizytę!</p>
+				</div>
 			</div>
 		</footer>
-	</article>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
