@@ -90,34 +90,16 @@ p
 	margin: 0 auto;
 }
 
-.p-login
-{
-	color: white;
-	text-align: center;
-	margin-top: 0;
-}
-
 .p-content
 {
 	color: white;
 	text-align: justify;
 }
 
-.p-input
-{
-	color: white;
-	text-align: left;
-	margin-top: 0;
-}
-
 .p-input-radio
 {
 	color: white;
 	text-align: left;
-
-/*
-	margin-top: 10px;
-	margin-bottom: 10px; */
 }
 
 .bo
@@ -161,75 +143,9 @@ h3
 	border-radius: 15px;
 }
 
-.top
-{
-	border: 2px solid #ccc;
-	border-radius: 30px;
-}
-
-.bottom
-{
-	background-color: #333333;
-	border: 2px solid #fff;
-	border-radius:15px;
-}
-
-.bottom-content
-{
-	width: 1468px;
-	padding: 15px;
-	background-color: #333333;
-	border: 1px solid #696969;
-	border-radius:20px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-}
-
-.top-personal-budget
-{
-	width: 800px;
-	border: 1px solid #ccc;
-	border-radius: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-}
-
-.columns100
-{
-	width: 100%; 
-	display: flex;
-	margin-bottom: 10px;
-}
-
-.border-size
-{
-	border: 1px;
-}
-
-.log-in
-{
-	margin-top: 20px;
-	width: 802px;
-	margin-left: auto;
-	margin-right: auto;
-	display: flex;
-}
-
 .log-in-or-register
 {
 	border-right: 2px solid #ccc; 
-}
-
-.col-1
-{
-	width: 20%;
-}
-
-.col-2
-{
-	width: 50%;
 }
 
 .submit2
@@ -242,70 +158,6 @@ h3
 {
 	width: 100%;
 	text-align: center;
-}
-
-.div-input
-{
-	display: flex;
-	margin-bottom: 10px;
-}
-
-.col-text
-{
-	width: 80px;
-}
-
-.col-text2
-{
-	width: 240px;
-	margin-top: 30px;
-}
-
-.col-input
-{
-	width: 100px;
-}
-
-.col-input-2
-{
-	width: 200px;
-	margin-top: 30px;
-}
-
-.col-input-3
-{
-	width:300px;
-}
-
-.menu-select
-{
-	margin-left: auto;
-	margin-right: auto;
-	display: flex;
-	width: 800px;
-}
-
-.select-option
-{
-	padding: 10px 20px;
-}
-
-.div-input-text-area
-{
-	display: flex;
-	margin-top: 10px;
-}
-
-.inputs-body
-{
-	width: 400px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.radio-gap 
-{
-	margin-bottom: 5px;
 }
 
 @media (min-width: 1900px)
