@@ -229,3 +229,12 @@ h3
 	}
 }
 
+@media (min-width: 1500px)
+{
+	.col-xxl-9 
+	{
+		flex: 0 0 auto;
+		width: 1250px;
+	}
+}
+
