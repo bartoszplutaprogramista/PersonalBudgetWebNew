@@ -15,7 +15,7 @@ body
 
 .div-balance-buttons
 {
-	width: 50%;
+	width: 650px;
 }
 
 .div-form-buttons
@@ -343,6 +343,28 @@ h3
 	.w-75 
 	{
 		width: 50% !important;
+	}
+	.flex-row
+	{
+		flex-direction: column !important;
+	}
+	.div-balance-buttons
+	{
+		width: 250px;
+	}
+	.balance-width
+	{
+		width: 100%;
+	}
+	.small-text
+	{
+		text-align: center;
+		margin-left: 0px;
+		margin-top: 20px;
+	}
+	.p-input-radio
+	{
+		text-align: center;
 	}
 }
 
