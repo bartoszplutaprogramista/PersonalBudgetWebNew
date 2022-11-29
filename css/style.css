@@ -229,7 +229,7 @@ h3
 	}
 }
 
-@media (min-width: 1500px)
+@media (min-width: 1400px)
 {
 	.col-xxl-9 
 	{
@@ -242,7 +242,15 @@ h3
 {
 	h1
 	{
-		font-size: 50px;
+		font-size: 44px;
+	}
+	.bo
+	{
+		font-size: 18px;
+	}
+	.p-content
+	{
+		text-align: left;
 	}
 }
 
