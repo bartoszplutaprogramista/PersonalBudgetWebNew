@@ -1,3 +1,21 @@
+<?php
+
+	session_start();
+
+	if ((!isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==false)){
+		header('Location: index.php');
+		exit();
+	}
+
+	$amountIncome = $_POST['amountIncome'];
+	$dateIncome = $_POST['dateIncome'];
+	$paymentCategoryIncome = $_POST['paymentCategoryIncome'];
+	$commentIncome = $_POST['commentIncome'];
+
+	echo $amountIncome. '<br />'. $dateIncome.'<br />'.$paymentCategoryIncome.'<br />'.$commentIncome;
+	exit();
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -9,7 +27,7 @@
 	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami">
 	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/style1.css" type="text/css">
 	<link rel="stylesheet" href="css/fontello.css" type="text/css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
@@ -21,14 +39,19 @@
 	
 	<div class="container-fluid">
 		<header>
-			<div class="row justify-content-center m-0 p-0">
+			<div class="row justify-content-center m-0 mb-2 p-0">
 				<div class="col-xl-12 col-xxl-9">
-					<div class="p-4 mt-5">
-						<h1><i class="icon-dollar-1"></i>BUDŻET OSOBISTY</h1>
-						<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+					<div class="p-0 mt-5 dispaly-as-flex">
+							<div class="text-center"><i class="icon-dollar-1"></i></div>
+							<div><h1>BUDŻET OSOBISTY</h1></div>
 					</div>
+					<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
 				</div>
 			</div>
+			<div class="row class-center col-xl-12 col-xxl-9 p-0"><p class="display-right">Witaj 
+			<?php 
+				echo $_SESSION['userName'];
+			?></p></div>
 			<div class="row justify-content-center m-0 p-0">
 				<nav class="navbar navbar-expand-xl col-xl-12 col-xxl-9 navbar-light top-bar p-0">
 					<div class="container-fluid padding-991"> 
@@ -39,16 +62,16 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="personalBudget.html"><i class="icon-home"></i>Strona główna</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="personalBudget.php"><i class="icon-home"></i>Strona główna</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addIncome.html"><i class="icon-dollar"></i>Dodaj przychód</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="addIncome.php"><i class="icon-dollar"></i>Dodaj przychód</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addExpense.html"><i class="icon-basket"></i>Dodaj wydatek</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="addExpense.php"><i class="icon-basket"></i>Dodaj wydatek</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link text-light py-3" href="browseTheBalance.html"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
+									<a class="nav-link text-light py-3" href="browseTheBalance.php"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
 								</li>
 								<li class="nav-item dropdown li-change-color">
 									<a class="nav-link dropdown-toggle text-light py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,7 +83,7 @@
 									</ul>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="index.html"><i class="icon-logout-1"></i>Wyloguj się</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="logOut.php"><i class="icon-logout-1"></i>Wyloguj się</a>
 								</li>
 							</ul>
 						</div>
@@ -73,56 +96,38 @@
 				<div class="row justify-content-center m-0 p-0">
 					<div class="col-xl-12 col-xxl-9 p-0">
 						<div class="content mt-2 p-4">	
-							<h3>DODAJ WYDATEK</h3>
+							<h3>DODAJ PRZYCHÓD</h3>
 							<div class="div-form-buttons mx-auto">
-								<form action="#" method="post">
+								<form method="post">
 									<div class="mb-3">
-										<label for="amountOfExpanse" class="form-label">Kwota (zł):</label>
-										<input type="number" class="form-control" min="0" step="0.01" id="amountOfExpanse" value="1" onkeypress="return onlyNumberKey(event)">
+										<label for="amount" class="form-label">Kwota (zł):</label>
+										<input type="number" class="form-control" min="0" step="0.01" id="amount" value="1" name="amountIncome" onkeypress="return onlyNumberKey(event)">
 									</div>
 									<div class="mb-3">
 										<label for="theDate" class="form-label">Data:</label>
-										<input type="date" class="form-control" id="theDate" min="2000-01-01">
+										<input type="date" class="form-control" id="theDate" min="2000-01-01" name="dateIncome">
 									</div>
-									<label class="p-input-radio mb-2" for="paymentMethod">Sposób płatności:</label>
-									<select class="form-select form-select-sm mb-3" aria-label="sposob platnosci" name="paymentMethod" id="paymentMethod">
-										<option value="remuneration">Gotówka</option>
-										<option value="interest">Karta debetowa</option>
-										<option value="allegro">Karta kredytowa</option>
-									</select>
-									<label class="p-input-radio mb-2" for="paymentCategory">Kategoria płatności: </label>
-									<select class="form-select form-select-sm" aria-label="sposob platnosci" name="paymentCategory" id="paymentCategory">
-										<option value="remuneration">Jedzenie</option>
-										<option value="interest">Mieszkanie</option>
-										<option value="allegro">Transport</option>
-										<option value="allegro">Telekomunikacja</option>
-										<option value="allegro">Opieka zdrowotna</option>
-										<option value="allegro">Ubranie</option>
-										<option value="allegro">Higiena</option>
-										<option value="allegro">Dzieci</option>
-										<option value="allegro">Rozrywka</option>
-										<option value="allegro">Wycieczka</option>
-										<option value="allegro">Szkolenia</option>
-										<option value="allegro">Książki</option>
-										<option value="allegro">Oszczędności</option>
-										<option value="allegro">Na złotą jesień, czyli emeryturę</option>
-										<option value="allegro">Spłata długów</option>
-										<option value="allegro">Darowizna</option>
-										<option value="allegro">Inne</option>
+									<label class="p-input-radio mb-2" for="paymentCategoryIncome">Kategoria płatności:</label>
+									<select class="form-select form-select-sm" aria-label="kategoria platnosci" name="paymentCategoryIncome" id="paymentCategoryIncome">
+										<option value="remuneration">Wynagrodzenie</option>
+										<option value="interest">Odsetki</option>
+										<option value="allegro">Allegro</option>
+										<option value="other">Inne</option>
 									</select>
 									<div class="mt-3 mb-3">
 										<label for="comment" class="form-label">Komentarz (opcjonalnie):</label>
-										<textarea class="form-control" id="comment" rows="2"></textarea>
+										<textarea class="form-control" id="comment" rows="2" name="commentIncome"></textarea>
 									</div>
 									<div class="mt-4 submit">
 										<button type="submit" class="btn btn-warning btn-lg">Dodaj</button>
 									</div>
-								</form>	
+								</form>
+								<!--
 								<form>
 									<div class="mt-4 submit">
 										<button type="button" onclick="document.location='personalBudget.html'" class="btn btn-warning btn-lg">Anuluj</button>
 									</div>
-								</form>
+								</form> -->
 							</div>
 						</div>
 					</div>
@@ -133,7 +138,7 @@
 			<div class="row justify-content-center m-0 p-0">	
 				<div class="col-xl-12 col-xxl-9">
 					<div class="p-2">
-						<p>Wszelkie prawa zastrzeżone &copy; 2022 Dziękuję za wizytę!</p>
+						<p>Wszelkie prawa zastrzeżone &copy; 2023 Dziękuję za wizytę!</p>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,23 @@
+<?php
+	session_start();
+
+	if(!isset($_SESSION['session_everythings_OK'])){
+		header('Location: index.php');
+		exit();
+	} else {
+		unset($_SESSION['session_everythings_OK']);
+	}
+
+	if(isset($_SESSION['remember_nick'])) unset($_SESSION['remember_nick']);
+	if(isset($_SESSION['remember_email'])) unset($_SESSION['remember_email']);
+	if(isset($_SESSION['remember_newPassword1'])) unset($_SESSION['remember_newPassword1']);
+	if(isset($_SESSION['remember_newPassword2'])) unset($_SESSION['remember_newPassword2']);
+	
+	if(isset($_SESSION['e_nick'])) unset($_SESSION['e_nick']);
+	if(isset($_SESSION['e_email'])) unset($_SESSION['e_email']);
+	if(isset($_SESSION['e_password'])) unset($_SESSION['e_password']);
+	if(isset($_SESSION['e_bot'])) unset($_SESSION['e_bot']);
+?>
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -9,7 +29,7 @@
 	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami">
 	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/style1.css" type="text/css">
 	<link rel="stylesheet" href="css/fontello.css" type="text/css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
@@ -19,35 +39,21 @@
 
 		<div class="container-fluid">
 			<header>
-				<div class="row justify-content-center m-0 p-0">
-					<div class="col-xl-12 col-xxl-9 p-4 mt-5">
-						<h1><i class="icon-dollar-1"></i>BUDŻET OSOBISTY</h1>
+				<div class="row justify-content-center m-0 mb-4 p-0">
+					<div class="col-xl-12 col-xxl-9">
+						<div class="p-0 mt-5 dispaly-as-flex">
+								<div class="text-center"><i class="icon-dollar-1"></i></div>
+								<div><h1>BUDŻET OSOBISTY</h1></div>
+						</div>
 						<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
 					</div>
 				</div>
 			</header>
 			<main>
 				<article>
-					<div class="row justify-content-center m-0 p-0">
-						<div class="col-sm-12 col-lg-4 col-xxl-3 log-in-or-register mt-3">
-							<form action="personalBudget.html" method="post">
-								<p class="p-2"> Masz już konto? </p>
-								<div class="input-group mb-3 w-75 set-margin">
-									<input type="text" class="form-control" placeholder="Podaj login" aria-label="username" required>
-								</div>	
-								<div class="input-group mb-3 w-75 set-margin">
-									<input type="password" class="form-control" placeholder="Podaj hasło" aria-label="password" required>
-								</div>
-								
-								<div class="submit"><button type="submit" class="btn btn-warning">Zaloguj się</button></div> 
-							</form>
-						</div>
-						<div class="col-sm-12 col-lg-4 col-xxl-3 mt-3">
-							<form>
-								<p class="p-2"> Nie masz jeszcze konta? </p>
-								<div class="submit"><button type="button" onclick="document.location='registration.html'" class="btn btn-success ">Zarejestruj się</button></div>
-							</form>
-						</div>
+					<div class="row m-0 p-0">
+                        <p class="success">Dziękuję za rejestrację w serwisie! Możesz już się zalogować!</p>
+                        <a href="index.php" class="text-center">Zaloguj się na swoje konto!</a>
 					</div>
 				</article>
 			</main>
