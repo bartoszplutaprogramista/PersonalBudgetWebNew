@@ -24,6 +24,13 @@
                 $user = $result_users->fetch();
                 if(password_verify($password, $user['password'])){
 
+                    $queryId = $db->prepare('SELECT id FROM users WHERE username = :userName');	
+                    $queryId->bindValue(':userName', $username, PDO::PARAM_STR);
+                    $queryId->execute();
+                
+                    $userId = $queryId->fetch();
+
+                    $_SESSION['userId'] = $userId['id'];
                     $_SESSION['userName'] = $username;
                     $_SESSION['loggedIn'] = true;
                     unset($_SESSION['error']);

@@ -11,23 +11,29 @@
 	if(isset($_POST['amountIncome'])){
 		$amountIncome = $_POST['amountIncome'];
 		$dateIncome = $_POST['dateIncome'];
-		$paymentCategoryIncome = $_POST['paymentCategoryIncome'];
+		$paymentCategoryIncomeName = $_POST['paymentCategoryIncomeName'];
 		$commentIncome = $_POST['commentIncome'];
+
+	//	echo "paymentCategoryIncomeName: ".$paymentCategoryIncomeName;
+	//	exit();
 	
-		$queryPaymentCategoryIncome = $db->prepare('SELECT id FROM incomes_category_default WHERE name = :nameIncCat');	
-		$queryPaymentCategoryIncome->bindValue(':nameIncCat', $paymentCategoryIncome, PDO::PARAM_STR);
+		$queryPaymentCategoryIncome = $db->prepare('SELECT id FROM incomes_category_assigned_to_users WHERE name = :nameIncomeCategory AND user_id = :userId');	
+		$queryPaymentCategoryIncome->bindValue(':nameIncomeCategory', $paymentCategoryIncomeName, PDO::PARAM_STR);
+		$queryPaymentCategoryIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$queryPaymentCategoryIncome->execute();
 
-		$paymentCategoryIncomeId  = $queryPaymentCategoryIncome -> fetch();
+		$paymentCategoryIncomeId  = $queryPaymentCategoryIncome->fetch();
 
-		$queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-		$queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-		$queryId->execute();
+	//	echo $paymentCategoryIncomeId['id'];
+	//	exit();
+		// $queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
+		// $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
+		// $queryId->execute();
 	
-		$userId = $queryId->fetch();
+		// $userId = $queryId->fetch();
 
 		$queryIncome = $db->prepare('INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment) VALUES (:userId, :paymentCategoryIncome, :amount, :dateIncome, :commentIncome)');	
-		$queryIncome->bindValue(':userId', $userId['id'], PDO::PARAM_INT);
+		$queryIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$queryIncome->bindValue(':paymentCategoryIncome', $paymentCategoryIncomeId['id'], PDO::PARAM_INT);
 		$queryIncome->bindValue(':amount', $amountIncome, PDO::PARAM_STR);
 		$queryIncome->bindValue(':dateIncome', $dateIncome, PDO::PARAM_STR);
@@ -130,7 +136,7 @@
 										<input type="date" class="form-control" id="theDate" min="2000-01-01" name="dateIncome">
 									</div>
 									<label class="p-input-radio mb-2" for="paymentCategoryIncome">Kategoria płatności:</label>
-									<select class="form-select form-select-sm" aria-label="kategoria platnosci" name="paymentCategoryIncome" id="paymentCategoryIncome">
+									<select class="form-select form-select-sm" aria-label="kategoria platnosci" name="paymentCategoryIncomeName" id="paymentCategoryIncomeId">
 										<option value="Salary">Wynagrodzenie</option>
 										<option value="Interest">Odsetki</option>
 										<option value="Allegro">Allegro</option>

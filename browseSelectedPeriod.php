@@ -11,34 +11,76 @@
 
     $paymentMethod = $_POST['paymentMethod'];
 
-    $queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-    $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-    $queryId->execute();
-
-    $userId = $queryId->fetch();
-
 	$currentDate=date("Y-m-d");
 
 	$dataHelpYearMonth = date("Y-m");
     $dataHelpCurrentMonth = $dataHelpYearMonth."%";
 
-	$queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-    $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-    $queryId->execute();
-
-    $userId = $queryId->fetch();
-
     if($paymentMethod=='currentMonth'){
-        $incomesCurrentMonth = $db->prepare('SELECT * FROM incomes WHERE user_id = :user_id AND date_of_income LIKE :dataHelpCurrentMonth ORDER BY date_of_income ASC');	
-        $incomesCurrentMonth->bindValue(':user_id', $userId['id'], PDO::PARAM_INT);
-		$incomesCurrentMonth->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
-        $incomesCurrentMonth->execute();
-        $incomesOfLoggedUser = $incomesCurrentMonth->fetchAll();
 
-    }
- //   elseif($paymentMethod=='lastMonth') echo 'lastMonth';
-//   elseif($paymentMethod=='currentYear') echo 'currentYear';
- //   else echo 'selectedPeriod';
+		$queryNameIncome = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income LIKE :dataHelpCurrentMonth');
+		$queryNameIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameIncome->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
+		$queryNameIncome->execute();
+
+		$queryName = $queryNameIncome->fetchAll();
+	} elseif ($paymentMethod=='lastMonth'){
+
+	//	$currentDate=date("Y-m-d");
+
+		$dateCurrentMonth = (int)date("m");
+//		$dateCurrentMonth = "10";
+
+//		echo "dataHelpYearLastMonth: ".$dateCurrentMonth;
+
+		 
+
+
+	//	echo "lastMonthDate: ".$lastMonthDate;
+
+	//	$fullDateLastMonth = date("Y-").$lastMonthDate."%";
+
+		if ((int)date("m")==1){
+			$dateCurrentYearMinusOne = (int)date("Y") - 1;
+			$dateCurrentMonthMinusOne = 12;
+			$fullDateLastMonth = $dateCurrentYearMinusOne."-".$dateCurrentMonthMinusOne;
+		} elseif ((int)date("m")>=2 || (int)date("m")<=10){
+			$lastMonthDate = $dateCurrentMonth-1;
+			$fullDateLastMonth = date("Y-")."0".$lastMonthDate;
+		} else {
+			$dateCurrentMonthMinusOne = (int)date("Y") - 1;
+			$fullDateLastMonth = date("Y-").$dateCurrentMonthMinusOne;
+		 }
+
+		// if($dateCurrentMonth==1){
+		// 	$dateCurrentYearMinusOne = (int)date("Y") - 1;
+		// 	$dateCurrentMonthMinusOne = 12;
+		// 	$fullDateLastMonth = $dateCurrentYearMinusOne."-".$dateCurrentMonthMinusOne;
+		// }elseif($dateCurrentMonth>=2 && $dateCurrentMonth<=10){
+		// 	$lastMonthDate = $dateCurrentMonth-1;
+		// 	$fullDateLastMonth = date("Y-")."0".$lastMonthDate;
+		// }else {
+		// 	$dateCurrentMonthMinusOne = $dateCurrentMonth - 1;
+		// 	$fullDateLastMonth = date("Y-").$dateCurrentMonthMinusOne;
+		// }
+
+		
+		
+		
+//		echo "FULL lastMonthDate: ".$fullDateLastMonth;
+
+	//	exit();
+
+		$fullDateLastMonth = $fullDateLastMonth."%";
+
+		$queryNameIncome = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income LIKE :dataHelpLastMonth');
+		$queryNameIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameIncome->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
+		$queryNameIncome->execute();
+
+		$queryName = $queryNameIncome->fetchAll();		
+	}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -122,9 +164,34 @@
 						<div class="content mt-2 p-4">	
 							<h3>PRZEGLĄDAJ BILANS</h3>
 				<!--			<p class="p-content p-2 text-center">Zestawienie przychodów w okresie od do </p> -->
-                <table class="table-center">
+                <table class="table-center table-responsive">
 					<thead>
-						<tr><th colspan="5">Zestawienie przychodów w okresie od <?= $dataHelpYearMonth."-01" ?> do <?= $currentDate ?></th></tr>
+						<tr><th colspan="5">Zestawienie przychodów w okresie od 
+							<?php 
+								if ($paymentMethod=='currentMonth')$dataHelpYearMonth."-01 do ".$currentDate; 
+								elseif($paymentMethod=='lastMonth'){
+									$month = (int)date("m");
+									$year = $dateCurrentYearMinusOne;
+									if($month==1) $day=31;
+									elseif($month==3) $day=31;
+									elseif($month==5) $day=31;
+									elseif($month==7) $day=31;
+									elseif($month==8) $day=31;
+									elseif($month==10) $day=31;
+									elseif($month==12) $day=31;
+									elseif($month==4) $day=30;
+									elseif($month==6) $day=30;
+									elseif($month==9) $day=30;
+									elseif($month==11) $day=30;	
+									else {
+										if((($year % 4 == 0) && ($year % 100 != 0)) || ($year % 400 == 0)) $day = 29;
+										elseif(!((($year % 4 == 0) && ($year % 100 != 0)) || ($year % 400 == 0))) $day=28;
+									}
+									$fullDateLastMonthPlusDay = $fullDateLastMonth."-01 do ".$fullDateLastMonth.$day;		
+								}
+							?>
+						
+						</th></tr>
 						<tr>
                             <th>Lp</th>
                             <th>Kwota (zł)</th>
@@ -138,12 +205,17 @@
 
              //           echo $incomesOfLoggedUser['amount'];
 						$i=1;
-						foreach ($incomesOfLoggedUser as $incomesUser) {
+						foreach ($queryName as $incomesUser) {
+
+							if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
+							elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
+							elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
+							else $displayInPolish = "Inne";
 							echo "<tr>
                                     <td class=\"center-td\">$i</td>
                                     <td>{$incomesUser['amount']}</td>
                                     <td>{$incomesUser['date_of_income']}</td>
-									<td>{$incomesUser['income_category_assigned_to_user_id']}</td>
+									<td>$displayInPolish</td>
                                     <td>{$incomesUser['income_comment']}</td>
                                 </tr>";
 								$i++;
