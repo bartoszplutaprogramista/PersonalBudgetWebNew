@@ -26,6 +26,13 @@ body
 }
 
 /*
+.table{
+	display: block !important;
+	overflow-x: auto !important;
+	width: 100% !important;
+  } */
+
+/*
 .css-s1 tr:nth-child(2n+1) 
 {
     background: #373737;

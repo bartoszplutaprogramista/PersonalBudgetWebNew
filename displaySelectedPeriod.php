@@ -8,60 +8,20 @@
 		header('Location: index.php');
 		exit();
 	}
+	$dateSelectedPeriod1 = $_POST['dateSelectedPeriod1'];
+	$dateSelectedPeriod2 = $_POST['dateSelectedPeriod2'];
 
-    $paymentMethod = $_POST['paymentMethod'];
+//	echo "dateSelectedPeriod1 ".$dateSelectedPeriod1;
+//	echo "dateSelectedPeriod2 ".$dateSelectedPeriod2;
+//	exit();
 
-	$currentDate=date("Y-m-d");
+	$queryNameSelectedPeriod = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income > :dateSelectedPeriod1 AND date_of_income < :dateSelectedPeriod2 ORDER BY date_of_income ASC');
+	$queryNameSelectedPeriod->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
+	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
+	$queryNameSelectedPeriod->execute();
 
-//	$currentDate_m_d_Y = date("d-m-Y");
-//	$dataHelpMonthYear = date("m-Y");
-
-	$dataHelpYearMonth = date("Y-m");
-	$dateCurrentYear = date("Y");
-    $dataHelpCurrentMonth = $dataHelpYearMonth."%";
-
-    if($paymentMethod=='currentMonth'){
-
-		$dateFromTo = $dataHelpYearMonth."-01 do ".$currentDate; 
-
-		$queryNameIncome = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income LIKE :dataHelpCurrentMonth ORDER BY date_of_income ASC');
-		$queryNameIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-		$queryNameIncome->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
-		$queryNameIncome->execute();
-
-		$queryName = $queryNameIncome->fetchAll();
-	} elseif ($paymentMethod=='lastMonth'){
-
-		$dateCurrentMonth = (int)date("m");
-
-		$timeHowManyDays = date('t', strtotime("-1 MONTH"));
-		$timeMonth = date('m', strtotime("-1 MONTH"));
-		$timeYear = date('Y', strtotime("-1 MONTH"));
-
-		$dateFromTo = $timeYear."-".$timeMonth."-01 do ".$timeYear."-".$timeMonth."-".$timeHowManyDays;
-		
-		$fullDateLastMonth = $timeYear."-".$timeMonth."%";
-
-		$queryNameIncome = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income LIKE :dataHelpLastMonth ORDER BY date_of_income ASC');
-		$queryNameIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-		$queryNameIncome->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
-		$queryNameIncome->execute();
-
-		$queryName = $queryNameIncome->fetchAll();		
-	} elseif ($paymentMethod=='currentYear'){
-
-		$dateFromTo = 	$dateCurrentYear."-01-01 do ".$currentDate;
-		$fullDateCurrentYear = $dateCurrentYear."%";
-
-		$queryNameIncome = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income LIKE :dataHelpCurrentYear ORDER BY date_of_income ASC');
-		$queryNameIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-		$queryNameIncome->bindValue(':dataHelpCurrentYear', $fullDateCurrentYear, PDO::PARAM_STR);
-		$queryNameIncome->execute();
-
-		$queryName = $queryNameIncome->fetchAll();
-	} else {
-		header('Location: browseProcessingSelectedPeriod.php');
-	}
+	$queryName = $queryNameSelectedPeriod->fetchAll();    
 
 ?>
 <!DOCTYPE HTML>
@@ -144,48 +104,43 @@
 				<div class="row justify-content-center m-0 p-0">
 					<div class="col-xl-12 col-xxl-9 p-0">
 						<div class="content mt-2 p-4">	
-							<h3>PRZEGLĄDAJ BILANS</h3>
-				<!--			<p class="p-content p-2 text-center">Zestawienie przychodów w okresie od do </p> -->
-                <table class="table-center table-responsive">
-					<thead>
-						<tr><th colspan="5">Zestawienie przychodów w okresie od 
-							<?php 
-								echo $dateFromTo;
-							?>
-						
-						</th></tr>
-						<tr>
-                            <th>Lp</th>
-                            <th>Kwota (zł)</th>
-                            <th>Data</th>
-                            <th>Kategoria</th>
-                            <th>Komentarz</th>
-                        </tr>
-					</thead>
-                    <tbody>
-						<?php
+							<h3>PRZEGLĄDAJ BILANSSSS</h3>
+							<div class="table-responsive">
+								<table class="table table-center">
+									<thead>
+										<tr><th colspan="5">Zestawienie przychodów w okresie od 
+											<?= $dateSelectedPeriod1." do ".$dateSelectedPeriod2; ?>
+										</th></tr>
+										<tr>
+											<th>Lp</th>
+											<th>Kwota (zł)</th>
+											<th>Data</th>
+											<th>Kategoria</th>
+											<th>Komentarz</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$i=1;
+										foreach ($queryName as $incomesUser) {
 
-             //           echo $incomesOfLoggedUser['amount'];
-						$i=1;
-						foreach ($queryName as $incomesUser) {
-
-							if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
-							elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
-							elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
-							else $displayInPolish = "Inne";
-							echo "<tr>
-                                    <td class=\"center-td\">$i</td>
-                                    <td>{$incomesUser['amount']}</td>
-                                    <td>{$incomesUser['date_of_income']}</td>
-									<td>$displayInPolish</td>
-                                    <td>{$incomesUser['income_comment']}</td>
-                                </tr>";
-								$i++;
-						    }
-						?>
-					</tbody>
-					
-				</table>                            
+											if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
+											elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
+											elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
+											else $displayInPolish = "Inne";
+											echo "<tr>
+													<td class=\"center-td\">$i</td>
+													<td>{$incomesUser['amount']}</td>
+													<td>{$incomesUser['date_of_income']}</td>
+													<td>$displayInPolish</td>
+													<td>{$incomesUser['income_comment']}</td>
+												</tr>";
+												$i++;
+											}
+										?>
+									</tbody>
+								</table> 
+							</div>                           
 						</div>
 					</div>
 				</div>

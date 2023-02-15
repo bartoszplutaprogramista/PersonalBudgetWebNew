@@ -135,7 +135,7 @@
 										<label for="theDate" class="form-label">Data:</label>
 										<input type="date" class="form-control" id="theDate" min="2000-01-01" name="dateIncome">
 									</div>
-									<label class="p-input-radio mb-2" for="paymentCategoryIncome">Kategoria płatności:</label>
+									<label class="p-input-radio mb-2" for="paymentCategoryIncomeId">Kategoria płatności:</label>
 									<select class="form-select form-select-sm" aria-label="kategoria platnosci" name="paymentCategoryIncomeName" id="paymentCategoryIncomeId">
 										<option value="Salary">Wynagrodzenie</option>
 										<option value="Interest">Odsetki</option>
