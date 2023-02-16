@@ -15,26 +15,29 @@
 		$commentExpense = $_POST['commentExpense'];
 		$paymentName = $_POST['paymentMethod'];
 	
-		$queryPaymentCategoryExpense = $db->prepare('SELECT id FROM expenses_category_default WHERE name = :nameExpCat');	
+		$queryPaymentCategoryExpense = $db->prepare('SELECT id FROM expenses_category_assigned_to_users WHERE name = :nameExpCat AND user_id = :userId');	
 		$queryPaymentCategoryExpense->bindValue(':nameExpCat', $paymentCategoryExpense, PDO::PARAM_STR);
+		$queryPaymentCategoryExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$queryPaymentCategoryExpense->execute();
 
 		$paymentCategoryExpenseId  = $queryPaymentCategoryExpense -> fetch();
 
-		$queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-		$queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-		$queryId->execute();
+		// $queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
+		// $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
+		// $queryId->execute();
 	
-		$userId = $queryId->fetch();
+		// $userId = $queryId->fetch();
 
-		$paymentMethod = $db->prepare('SELECT id FROM payment_methods_default WHERE name = :paymentName');	
+
+		$paymentMethod = $db->prepare('SELECT id FROM payment_methods_assigned_to_users WHERE name = :paymentName AND user_id = :userId');	
 		$paymentMethod->bindValue(':paymentName', $paymentName, PDO::PARAM_STR);
+		$paymentMethod->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$paymentMethod->execute();
 	
 		$getPaymentId = $paymentMethod->fetch();
 
 		$queryIncome = $db->prepare('INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, payment_method_assigned_to_user_id, amount, date_of_expense, expense_comment) VALUES (:userId, :expense_category, :payment_method, :amount, :dateExpense, :commentExpense)');	
-		$queryIncome->bindValue(':userId', $userId['id'], PDO::PARAM_INT);
+		$queryIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$queryIncome->bindValue(':expense_category', $paymentCategoryExpenseId['id'], PDO::PARAM_INT);
 		$queryIncome->bindValue(':payment_method', $getPaymentId['id'], PDO::PARAM_INT);
 		$queryIncome->bindValue(':amount', $amountExpense, PDO::PARAM_STR);
@@ -131,13 +134,13 @@
 								<form method="post">
 									<div class="mb-3">
 										<label for="amountOfExpanse" class="form-label">Kwota (zł):</label>
-										<input type="number" class="form-control" min="0" step="0.01" id="amount" value="1" name="amountExpense" onkeypress="return onlyNumberKey(event)">
+										<input type="number" class="form-control" min="0" step="0.01" id="amountOfExpanse" value="1" name="amountExpense" onkeypress="return onlyNumberKey(event)">
 									</div>
 									<div class="mb-3">
 										<label for="theDate" class="form-label">Data:</label>
 										<input type="date" class="form-control" id="theDate" name="dateExpense" min="2000-01-01">
 									</div>
-									<label class="p-input-radio mb-2" for="paymentMethod">Sposób płatności:</label>
+									<label class="p-input-radio mb-2" for="paymentMethodId">Sposób płatności:</label>
 									<select class="form-select form-select-sm mb-3" aria-label="sposob platnosci" name="paymentMethod" id="paymentMethodId">
 										<option value="Cash">Gotówka</option>
 										<option value="Debit Card">Karta debetowa</option>

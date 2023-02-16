@@ -30,9 +30,34 @@
 		$queryNameIncome->execute();
 
 		$queryName = $queryNameIncome->fetchAll();
+
+
+		// $queryNameExpense = $db->prepare('SELECT * FROM expenses_category_assigned_to_users 
+		// INNER JOIN expenses ON expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id 
+		// INNER JOIN payment_methods_assigned_to_users ON expenses.payment_method_assigned_to_user_id = payment_methods_assigned_to_users.id
+		// WHERE expenses.user_id = :userId AND date_of_expense LIKE :dataHelpCurrentMonth 
+		// ORDER BY date_of_expense ASC');
+		$queryNameExpense = $db->prepare('SELECT 
+		ex.amount AS amn,
+		ex.date_of_expense AS dateExp,
+		pay.name AS pay,
+		exCat.name AS excategory,
+		ex.expense_comment AS comment
+		FROM expenses_category_assigned_to_users AS exCat 
+		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
+		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
+		WHERE ex.user_id = :userId AND date_of_expense LIKE :dataHelpCurrentMonth 
+		ORDER BY date_of_expense ASC');
+		$queryNameExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameExpense->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
+		$queryNameExpense->execute();
+
+		$queryExpense = $queryNameExpense->fetchAll();
+
+
 	} elseif ($paymentMethod=='lastMonth'){
 
-		$dateCurrentMonth = (int)date("m");
+	//	$dateCurrentMonth = (int)date("m");
 
 		$timeHowManyDays = date('t', strtotime("-1 MONTH"));
 		$timeMonth = date('m', strtotime("-1 MONTH"));
@@ -145,47 +170,81 @@
 					<div class="col-xl-12 col-xxl-9 p-0">
 						<div class="content mt-2 p-4">	
 							<h3>PRZEGLĄDAJ BILANS</h3>
-				<!--			<p class="p-content p-2 text-center">Zestawienie przychodów w okresie od do </p> -->
-                <table class="table-center table-responsive">
-					<thead>
-						<tr><th colspan="5">Zestawienie przychodów w okresie od 
-							<?php 
-								echo $dateFromTo;
-							?>
-						
-						</th></tr>
-						<tr>
-                            <th>Lp</th>
-                            <th>Kwota (zł)</th>
-                            <th>Data</th>
-                            <th>Kategoria</th>
-                            <th>Komentarz</th>
-                        </tr>
-					</thead>
-                    <tbody>
-						<?php
+							<div class="table-responsive">
+								<table class="table-center">
+									<thead>
+										<tr><th colspan="5" class="center-td">Zestawienie przychodów w okresie od 
+											<?php 
+												echo $dateFromTo;
+											?>
+										
+										</th></tr>
+										<tr>
+											<th>Lp</th>
+											<th>Kwota (zł)</th>
+											<th>Data</th>
+											<th>Kategoria</th>
+											<th>Komentarz</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$i=1;
+										foreach ($queryName as $incomesUser) {
 
-             //           echo $incomesOfLoggedUser['amount'];
-						$i=1;
-						foreach ($queryName as $incomesUser) {
-
-							if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
-							elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
-							elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
-							else $displayInPolish = "Inne";
-							echo "<tr>
-                                    <td class=\"center-td\">$i</td>
-                                    <td>{$incomesUser['amount']}</td>
-                                    <td>{$incomesUser['date_of_income']}</td>
-									<td>$displayInPolish</td>
-                                    <td>{$incomesUser['income_comment']}</td>
-                                </tr>";
-								$i++;
-						    }
-						?>
-					</tbody>
-					
-				</table>                            
+											if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
+											elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
+											elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
+											else $displayInPolish = "Inne";
+											echo "<tr>
+													<td class=\"center-td\">$i</td>
+													<td>{$incomesUser['amount']}</td>
+													<td>{$incomesUser['date_of_income']}</td>
+													<td>$displayInPolish</td>
+													<td>{$incomesUser['income_comment']}</td>
+												</tr>";
+												$i++;
+											}
+										?>
+									</tbody>
+								</table>
+							</div> 
+							<div class="table-responsive mt-4">
+								<table class="table-center">
+									<thead>
+										<tr><th colspan="6" class="center-td">Zestawienie wydatków w okresie od 
+											<?php 
+												echo $dateFromTo;
+											?>
+										
+										</th></tr>
+										<tr>
+											<th>Lp</th>
+											<th>Kwota (zł)</th>
+											<th>Data</th>
+											<th>Sposób płatności</th>
+											<th>Kategoria</th>
+											<th>Komentarz</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$i=1;
+										foreach ($queryExpense as $expensesUser) {
+											echo "<tr>
+													<td class=\"center-td\">$i</td>
+													<td>{$expensesUser['amn']}</td>
+													<td>{$expensesUser['dateExp']}</td>
+													<td>{$expensesUser['pay']}</td>
+													<td>{$expensesUser['excategory']}</td>
+													<td>{$expensesUser['comment']}</td>
+												</tr>";
+												$i++;
+											}
+										?>
+									</tbody>
+								</table>
+							</div>                            
 						</div>
 					</div>
 				</div>

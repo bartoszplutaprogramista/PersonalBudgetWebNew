@@ -104,9 +104,9 @@
 				<div class="row justify-content-center m-0 p-0">
 					<div class="col-xl-12 col-xxl-9 p-0">
 						<div class="content mt-2 p-4">	
-							<h3>PRZEGLĄDAJ BILANSSSS</h3>
+							<h3>PRZEGLĄDAJ BILANS</h3>
 							<div class="table-responsive">
-								<table class="table table-center">
+								<table class="table-center">
 									<thead>
 										<tr><th colspan="5">Zestawienie przychodów w okresie od 
 											<?= $dateSelectedPeriod1." do ".$dateSelectedPeriod2; ?>

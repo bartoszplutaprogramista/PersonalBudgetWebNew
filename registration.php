@@ -113,7 +113,31 @@
 						$insertIntoAssignedToUsers->bindValue(':user_id', $userId['id'], PDO::PARAM_INT);
 						$insertIntoAssignedToUsers->bindValue(':name', "{$catName['name']}", PDO::PARAM_STR);
 						$insertIntoAssignedToUsers->execute();	
-					}				
+					}
+					
+					$queryNameExpenseCategoryDefault = $db->prepare('SELECT name FROM expenses_category_default');	
+					$queryNameExpenseCategoryDefault->execute();
+
+					$queryNameExpenses = $queryNameExpenseCategoryDefault->fetchAll();
+
+					foreach ($queryNameExpenses as $catExpenseName){
+						$insertIntoExpensesCategoryAssignedToUsers = $db->prepare('INSERT INTO expenses_category_assigned_to_users (user_id, name) VALUES (:user_id, :name)');
+						$insertIntoExpensesCategoryAssignedToUsers->bindValue(':user_id', $userId['id'], PDO::PARAM_INT);
+						$insertIntoExpensesCategoryAssignedToUsers->bindValue(':name', "{$catExpenseName['name']}", PDO::PARAM_STR);
+						$insertIntoExpensesCategoryAssignedToUsers->execute();	
+					}
+
+					$queryNamePaymentMethodsDefault = $db->prepare('SELECT name FROM payment_methods_default');	
+					$queryNamePaymentMethodsDefault->execute();
+
+					$queryNamePayment = $queryNamePaymentMethodsDefault->fetchAll();
+
+					foreach ($queryNamePayment as $paymentMethods){
+						$insertIntoExpensesCategoryAssignedToUsers = $db->prepare('INSERT INTO payment_methods_assigned_to_users (user_id, name) VALUES (:user_id, :name)');
+						$insertIntoExpensesCategoryAssignedToUsers->bindValue(':user_id', $userId['id'], PDO::PARAM_INT);
+						$insertIntoExpensesCategoryAssignedToUsers->bindValue(':name', "{$paymentMethods['name']}", PDO::PARAM_STR);
+						$insertIntoExpensesCategoryAssignedToUsers->execute();	
+					}
 
 					$_SESSION['session_everythings_OK'] = true;
 					header('Location: welcome.php');
