@@ -46,7 +46,7 @@
 
         } catch (PDOException $err){
             echo '<p style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o wizytę w innym terminie!</p>';
-            echo $err->getMessage();
+      //      echo $err->getMessage();
         } 
     }
 ?>

@@ -90,17 +90,7 @@
 							<h3>PRZEGLĄDAJ BILANS</h3>
                             <p>Wybierz okres czasu:</p>
                             <div class="div-form-buttons mx-auto mt-4">
-                                <form method="post" action="displaySelectedPeriod.php">
-								<!--	
-									<div class="mb-3">
-										<label for="theDate" class="form-label">Data:</label>
-										<input type="date" class="form-control" id="theDate" min="2000-01-01" name="dateIncome">
-									</div> 
-									<div class="mb-3">
-										<label for="theDate" class="form-label">Data:</label>
-										<input type="date" class="form-control" id="theDate" min="2000-01-01" name="dateIncome2">
-									</div>  -->
-								
+                                <form method="post" action="displaySelectedPeriod.php">								
                                     <div class="mb-3">
                                         <label for="theDate1" class="form-label">Początek okresu:</label>
                                         <input type="date" class="form-control" id="theDate1" min="2000-01-01" name="dateSelectedPeriod1">

@@ -13,9 +13,6 @@
 		$dateIncome = $_POST['dateIncome'];
 		$paymentCategoryIncomeName = $_POST['paymentCategoryIncomeName'];
 		$commentIncome = $_POST['commentIncome'];
-
-	//	echo "paymentCategoryIncomeName: ".$paymentCategoryIncomeName;
-	//	exit();
 	
 		$queryPaymentCategoryIncome = $db->prepare('SELECT id FROM incomes_category_assigned_to_users WHERE name = :nameIncomeCategory AND user_id = :userId');	
 		$queryPaymentCategoryIncome->bindValue(':nameIncomeCategory', $paymentCategoryIncomeName, PDO::PARAM_STR);
@@ -23,14 +20,6 @@
 		$queryPaymentCategoryIncome->execute();
 
 		$paymentCategoryIncomeId  = $queryPaymentCategoryIncome->fetch();
-
-	//	echo $paymentCategoryIncomeId['id'];
-	//	exit();
-		// $queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-		// $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-		// $queryId->execute();
-	
-		// $userId = $queryId->fetch();
 
 		$queryIncome = $db->prepare('INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment) VALUES (:userId, :paymentCategoryIncome, :amount, :dateIncome, :commentIncome)');	
 		$queryIncome->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
@@ -162,12 +151,6 @@
 									</form>';
 									}
 								?>
-								<!--
-								<form>
-									<div class="mt-4 submit">
-										<button type="button" onclick="document.location='personalBudget.html'" class="btn btn-warning btn-lg">Anuluj</button>
-									</div>
-								</form> -->
 							</div>
 						</div>
 					</div>

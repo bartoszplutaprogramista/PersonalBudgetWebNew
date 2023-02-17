@@ -13,9 +13,6 @@
 
 	$currentDate=date("Y-m-d");
 
-//	$currentDate_m_d_Y = date("d-m-Y");
-//	$dataHelpMonthYear = date("m-Y");
-
 	$dataHelpYearMonth = date("Y-m");
 	$dateCurrentYear = date("Y");
     $dataHelpCurrentMonth = $dataHelpYearMonth."%";
@@ -31,12 +28,6 @@
 
 		$queryName = $queryNameIncome->fetchAll();
 
-
-		// $queryNameExpense = $db->prepare('SELECT * FROM expenses_category_assigned_to_users 
-		// INNER JOIN expenses ON expenses_category_assigned_to_users.id = expenses.expense_category_assigned_to_user_id 
-		// INNER JOIN payment_methods_assigned_to_users ON expenses.payment_method_assigned_to_user_id = payment_methods_assigned_to_users.id
-		// WHERE expenses.user_id = :userId AND date_of_expense LIKE :dataHelpCurrentMonth 
-		// ORDER BY date_of_expense ASC');
 		$queryNameExpense = $db->prepare('SELECT 
 		ex.amount AS amn,
 		ex.date_of_expense AS dateExp,
@@ -57,8 +48,6 @@
 
 	} elseif ($paymentMethod=='lastMonth'){
 
-	//	$dateCurrentMonth = (int)date("m");
-
 		$timeHowManyDays = date('t', strtotime("-1 MONTH"));
 		$timeMonth = date('m', strtotime("-1 MONTH"));
 		$timeYear = date('Y', strtotime("-1 MONTH"));
@@ -72,7 +61,24 @@
 		$queryNameIncome->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
 		$queryNameIncome->execute();
 
-		$queryName = $queryNameIncome->fetchAll();		
+		$queryName = $queryNameIncome->fetchAll();
+		
+		$queryNameExpense = $db->prepare('SELECT 
+		ex.amount AS amn,
+		ex.date_of_expense AS dateExp,
+		pay.name AS pay,
+		exCat.name AS excategory,
+		ex.expense_comment AS comment
+		FROM expenses_category_assigned_to_users AS exCat 
+		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
+		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
+		WHERE ex.user_id = :userId AND date_of_expense LIKE :dataHelpLastMonth 
+		ORDER BY date_of_expense ASC');
+		$queryNameExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameExpense->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
+		$queryNameExpense->execute();
+
+		$queryExpense = $queryNameExpense->fetchAll();
 	} elseif ($paymentMethod=='currentYear'){
 
 		$dateFromTo = 	$dateCurrentYear."-01-01 do ".$currentDate;
@@ -84,6 +90,23 @@
 		$queryNameIncome->execute();
 
 		$queryName = $queryNameIncome->fetchAll();
+
+		$queryNameExpense = $db->prepare('SELECT 
+		ex.amount AS amn,
+		ex.date_of_expense AS dateExp,
+		pay.name AS pay,
+		exCat.name AS excategory,
+		ex.expense_comment AS comment
+		FROM expenses_category_assigned_to_users AS exCat 
+		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
+		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
+		WHERE ex.user_id = :userId AND date_of_expense LIKE :dataHelpCurrentYear 
+		ORDER BY date_of_expense ASC');
+		$queryNameExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameExpense->bindValue(':dataHelpCurrentYear', $fullDateCurrentYear, PDO::PARAM_STR);
+		$queryNameExpense->execute();
+
+		$queryExpense = $queryNameExpense->fetchAll();
 	} else {
 		header('Location: browseProcessingSelectedPeriod.php');
 	}
@@ -189,21 +212,21 @@
 									</thead>
 									<tbody>
 										<?php
-										$i=1;
-										foreach ($queryName as $incomesUser) {
-
-											if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
-											elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
-											elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
-											else $displayInPolish = "Inne";
-											echo "<tr>
-													<td class=\"center-td\">$i</td>
-													<td>{$incomesUser['amount']}</td>
-													<td>{$incomesUser['date_of_income']}</td>
-													<td>$displayInPolish</td>
-													<td>{$incomesUser['income_comment']}</td>
-												</tr>";
-												$i++;
+											if($queryNameIncome->rowCount()>0){
+											$i=1;
+											foreach ($queryName as $incomesUser) {
+												echo "<tr>
+														<td class=\"center-td\">$i</td>
+														<td>{$incomesUser['amount']}</td>
+														<td>{$incomesUser['date_of_income']}</td>
+														<td>{$incomesUser['name']}</td>
+														<td>{$incomesUser['income_comment']}</td>
+													</tr>";
+													$i++;
+												}
+											} else {
+												echo "<tr><td colspan=\"6\" class=\"center-td\">
+												Brak przychodów</td></tr>";											
 											}
 										?>
 									</tbody>
@@ -229,18 +252,24 @@
 									</thead>
 									<tbody>
 										<?php
-										$i=1;
-										foreach ($queryExpense as $expensesUser) {
-											echo "<tr>
-													<td class=\"center-td\">$i</td>
-													<td>{$expensesUser['amn']}</td>
-													<td>{$expensesUser['dateExp']}</td>
-													<td>{$expensesUser['pay']}</td>
-													<td>{$expensesUser['excategory']}</td>
-													<td>{$expensesUser['comment']}</td>
-												</tr>";
-												$i++;
+											if($queryNameExpense->rowCount()>0){
+												$i=1;
+												foreach ($queryExpense as $expensesUser) {
+													echo "<tr>
+															<td class=\"center-td\">$i</td>
+															<td>{$expensesUser['amn']}</td>
+															<td>{$expensesUser['dateExp']}</td>
+															<td>{$expensesUser['pay']}</td>
+															<td>{$expensesUser['excategory']}</td>
+															<td>{$expensesUser['comment']}</td>
+														</tr>";
+														$i++;
+												}
+											}else {
+												echo "<tr><td colspan=\"6\" class=\"center-td\">
+												Brak wydatków</td></tr>";								
 											}
+										
 										?>
 									</tbody>
 								</table>

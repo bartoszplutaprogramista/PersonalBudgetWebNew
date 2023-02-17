@@ -22,13 +22,6 @@
 
 		$paymentCategoryExpenseId  = $queryPaymentCategoryExpense -> fetch();
 
-		// $queryId = $db->prepare('SELECT id FROM users WHERE username = :userNameSession');	
-		// $queryId->bindValue(':userNameSession', $_SESSION['userName'], PDO::PARAM_STR);
-		// $queryId->execute();
-	
-		// $userId = $queryId->fetch();
-
-
 		$paymentMethod = $db->prepare('SELECT id FROM payment_methods_assigned_to_users WHERE name = :paymentName AND user_id = :userId');	
 		$paymentMethod->bindValue(':paymentName', $paymentName, PDO::PARAM_STR);
 		$paymentMethod->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
@@ -185,12 +178,6 @@
 									</form>';
 									}
 								?>
-								<!--
-								<form>
-									<div class="mt-4 submit">
-										<button type="button" onclick="document.location='personalBudget.html'" class="btn btn-warning btn-lg">Anuluj</button>
-									</div>
-								</form> -->
 							</div>
 						</div>
 					</div>

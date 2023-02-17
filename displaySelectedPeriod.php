@@ -11,17 +11,31 @@
 	$dateSelectedPeriod1 = $_POST['dateSelectedPeriod1'];
 	$dateSelectedPeriod2 = $_POST['dateSelectedPeriod2'];
 
-//	echo "dateSelectedPeriod1 ".$dateSelectedPeriod1;
-//	echo "dateSelectedPeriod2 ".$dateSelectedPeriod2;
-//	exit();
-
 	$queryNameSelectedPeriod = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income > :dateSelectedPeriod1 AND date_of_income < :dateSelectedPeriod2 ORDER BY date_of_income ASC');
 	$queryNameSelectedPeriod->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
 	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
 	$queryNameSelectedPeriod->execute();
 
-	$queryName = $queryNameSelectedPeriod->fetchAll();    
+	$queryName = $queryNameSelectedPeriod->fetchAll();
+	
+		$queryNameSelectedPeriodExpense = $db->prepare('SELECT 
+		ex.amount AS amn,
+		ex.date_of_expense AS dateExp,
+		pay.name AS pay,
+		exCat.name AS excategory,
+		ex.expense_comment AS comment
+		FROM expenses_category_assigned_to_users AS exCat 
+		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
+		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
+		WHERE ex.user_id = :userId AND date_of_expense > :dateSelectedPeriod1 AND date_of_expense < :dateSelectedPeriod2
+		ORDER BY date_of_expense ASC');
+		$queryNameSelectedPeriodExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
+		$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
+		$queryNameSelectedPeriodExpense->execute();
+
+		$queryExpensePeriod = $queryNameSelectedPeriodExpense->fetchAll();
 
 ?>
 <!DOCTYPE HTML>
@@ -121,26 +135,64 @@
 									</thead>
 									<tbody>
 										<?php
+										if($queryNameSelectedPeriod->rowCount()>0){
 										$i=1;
 										foreach ($queryName as $incomesUser) {
-
-											if($incomesUser['name']=="Salary") $displayInPolish = "Wynagrodzenie";
-											elseif($incomesUser['name']=="Interest") $displayInPolish = "Odsetki";
-											elseif($incomesUser['name']=="Allegro") $displayInPolish = "Allegro";
-											else $displayInPolish = "Inne";
 											echo "<tr>
 													<td class=\"center-td\">$i</td>
 													<td>{$incomesUser['amount']}</td>
 													<td>{$incomesUser['date_of_income']}</td>
-													<td>$displayInPolish</td>
+													<td>{$incomesUser['name']}</td>
 													<td>{$incomesUser['income_comment']}</td>
 												</tr>";
 												$i++;
 											}
+										}else {
+											echo "<tr><td colspan=\"6\" class=\"center-td\">
+											Brak przychodów</td></tr>";											
+										}
 										?>
 									</tbody>
 								</table> 
-							</div>                           
+							</div> 
+							<div class="table-responsive mt-4">
+								<table class="table-center">
+									<thead>
+										<tr><th colspan="6" class="center-td">Zestawienie wydatków w okresie od 
+										<?= $dateSelectedPeriod1." do ".$dateSelectedPeriod2; ?>
+										</th></tr>
+										<tr>
+											<th>Lp</th>
+											<th>Kwota (zł)</th>
+											<th>Data</th>
+											<th>Sposób płatności</th>
+											<th>Kategoria</th>
+											<th>Komentarz</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											if($queryNameSelectedPeriodExpense->rowCount()>0){
+											$i=1;
+											foreach ($queryExpensePeriod as $expensesUser) {
+												echo "<tr>
+														<td class=\"center-td\">$i</td>
+														<td>{$expensesUser['amn']}</td>
+														<td>{$expensesUser['dateExp']}</td>
+														<td>{$expensesUser['pay']}</td>
+														<td>{$expensesUser['excategory']}</td>
+														<td>{$expensesUser['comment']}</td>
+													</tr>";
+													$i++;
+												}
+											} else {
+												echo "<tr><td colspan=\"6\" class=\"center-td\">
+												Brak wydatków</td></tr>";					
+											}
+										?>
+									</tbody>
+								</table>
+							</div>                          
 						</div>
 					</div>
 				</div>

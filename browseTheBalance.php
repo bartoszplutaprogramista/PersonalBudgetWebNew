@@ -88,7 +88,6 @@
 					<div class="col-xl-12 col-xxl-9 p-0">
 						<div class="content mt-2 p-4">	
 							<h3>PRZEGLĄDAJ BILANS</h3>
-							<!--	<form action="#" method="post"> -->
 							<div class="d-flex flex-row bd-highlight div-balance-buttons mx-auto p-2">
 								<div class="bd-highlight balance-width">
 									<label class="p-input-radio mb-2 mt-1 w-100" for="paymentMethod">Wybierz okres czasu:</label>
@@ -107,7 +106,6 @@
 									</div>
 								</form>
 							</div>
-				<!--			</form> -->
 						</div>
 					</div>
 				</div>

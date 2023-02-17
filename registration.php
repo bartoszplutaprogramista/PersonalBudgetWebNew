@@ -148,25 +148,6 @@
 				exit('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 			}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -204,12 +185,8 @@
 			<article>
 				<div class="row justify-content-center m-0 p-0">
 					<div class="col-sm-12 col-lg-4 col-xxl-3 log-in-or-register mt-3">
-						<!--<form method="post"> -->
-							<p class="p-2"> Masz już konto? </p>
-							
-							<div class="submit"><button type="button" onclick="document.location='index.php'" class="btn btn-warning">Zaloguj się</div>
-							
-						<!--</form>-->
+						<p class="p-2"> Masz już konto? </p>
+						<div class="submit"><button type="button" onclick="document.location='index.php'" class="btn btn-warning">Zaloguj się</div>
 					</div>
 					<div class="col-sm-12 col-lg-4 col-xxl-3 mt-3">
 						<form method="post">
