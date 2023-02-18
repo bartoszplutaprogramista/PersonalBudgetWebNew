@@ -11,7 +11,7 @@
 	$dateSelectedPeriod1 = $_POST['dateSelectedPeriod1'];
 	$dateSelectedPeriod2 = $_POST['dateSelectedPeriod2'];
 
-	$queryNameSelectedPeriod = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income > :dateSelectedPeriod1 AND date_of_income < :dateSelectedPeriod2 ORDER BY date_of_income ASC');
+	$queryNameSelectedPeriod = $db->prepare('SELECT * FROM incomes_category_assigned_to_users INNER JOIN incomes ON incomes_category_assigned_to_users.id = incomes.income_category_assigned_to_user_id WHERE incomes.user_id = :userId AND date_of_income >= :dateSelectedPeriod1 AND date_of_income <= :dateSelectedPeriod2 ORDER BY date_of_income ASC');
 	$queryNameSelectedPeriod->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
 	$queryNameSelectedPeriod->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
@@ -28,7 +28,7 @@
 		FROM expenses_category_assigned_to_users AS exCat 
 		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
 		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
-		WHERE ex.user_id = :userId AND date_of_expense > :dateSelectedPeriod1 AND date_of_expense < :dateSelectedPeriod2
+		WHERE ex.user_id = :userId AND date_of_expense >= :dateSelectedPeriod1 AND date_of_expense <= :dateSelectedPeriod2
 		ORDER BY date_of_expense ASC');
 		$queryNameSelectedPeriodExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
 		$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
