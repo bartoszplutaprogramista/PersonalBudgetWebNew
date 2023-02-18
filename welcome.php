@@ -2,7 +2,7 @@
 	session_start();
 
 	if(!isset($_SESSION['session_everythings_OK'])){
-		header('Location: index.php');
+		header('Location: personal-budget');
 		exit();
 	} else {
 		unset($_SESSION['session_everythings_OK']);
@@ -53,7 +53,7 @@
 				<article>
 					<div class="row m-0 p-0">
                         <p class="success">Dziękuję za rejestrację w serwisie! Możesz już się zalogować!</p>
-                        <a href="index.php" class="text-center">Zaloguj się na swoje konto!</a>
+                        <a href="personal-budget" class="text-center">Zaloguj się na swoje konto!</a>
 					</div>
 				</article>
 			</main>

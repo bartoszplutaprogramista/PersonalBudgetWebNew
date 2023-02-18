@@ -6,6 +6,6 @@
 
     $_SESSION['correctlyLogOut'] = 'Nastąpiło poprawne wylogowanie';
 
-    header('Location: index.php');
+    header('Location: personal-budget');
 
 ?>

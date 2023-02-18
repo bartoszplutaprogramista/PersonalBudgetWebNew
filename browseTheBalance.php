@@ -3,7 +3,7 @@
 	session_start();
 
 	if ((!isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==false)){
-		header('Location: index.php');
+		header('Location: personal-budget');
 		exit();
 	}
 ?>
@@ -53,16 +53,16 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="personalBudget.php"><i class="icon-home"></i>Strona główna</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="home"><i class="icon-home"></i>Strona główna</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addIncome.php"><i class="icon-dollar"></i>Dodaj przychód</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-income"><i class="icon-dollar"></i>Dodaj przychód</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addExpense.php"><i class="icon-basket"></i>Dodaj wydatek</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-expense"><i class="icon-basket"></i>Dodaj wydatek</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link text-light py-3" href="browseTheBalance.php"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
+									<a class="nav-link text-light py-3" href="browse-the-balance"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
 								</li>
 								<li class="nav-item dropdown li-change-color">
 									<a class="nav-link dropdown-toggle text-light py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,7 +93,7 @@
 									<label class="p-input-radio mb-2 mt-1 w-100" for="paymentMethod">Wybierz okres czasu:</label>
 								</div>
 								<div class="bd-highlight balance-width">
-								<form action="browseSelectedPeriod.php" method="post">
+								<form action="browse-selected-period" method="post">
 										<select class="form-select form-select-sm mb-0 mt-1" aria-label="sposob platnosci" name="paymentMethod" id="paymentMethodSelected">
 											<option value="currentMonth">Bieżący miesiąc</option>
 											<option value="lastMonth">Poprzedni miesiąc</option>

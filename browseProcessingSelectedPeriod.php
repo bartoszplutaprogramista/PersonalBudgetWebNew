@@ -3,7 +3,7 @@
 	session_start();
 
 	if ((!isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==false)){
-		header('Location: index.php');
+		header('Location: personal-budget');
 		exit();
 	}
 ?>
@@ -53,16 +53,16 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="personalBudget.php"><i class="icon-home"></i>Strona główna</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="home"><i class="icon-home"></i>Strona główna</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addIncome.php"><i class="icon-dollar"></i>Dodaj przychód</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-income"><i class="icon-dollar"></i>Dodaj przychód</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addExpense.php"><i class="icon-basket"></i>Dodaj wydatek</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-expense"><i class="icon-basket"></i>Dodaj wydatek</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link text-light py-3" href="browseTheBalance.php"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
+									<a class="nav-link text-light py-3" href="browse-the-balance"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
 								</li>
 								<li class="nav-item dropdown li-change-color">
 									<a class="nav-link dropdown-toggle text-light py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,7 +90,7 @@
 							<h3>PRZEGLĄDAJ BILANS</h3>
                             <p>Wybierz okres czasu:</p>
                             <div class="div-form-buttons mx-auto mt-4">
-                                <form method="post" action="displaySelectedPeriod.php">								
+                                <form method="post" action="display-selected-period">				
                                     <div class="mb-3">
                                         <label for="theDate1" class="form-label">Początek okresu:</label>
                                         <input type="date" class="form-control" id="theDate1" min="2000-01-01" name="dateSelectedPeriod1">

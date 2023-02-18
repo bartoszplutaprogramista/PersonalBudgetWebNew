@@ -76,7 +76,7 @@
 						<div class="col-sm-12 col-lg-4 col-xxl-3 mt-3">
 							<form>
 								<p class="p-2"> Nie masz jeszcze konta? </p>
-								<div class="submit"><button type="button" onclick="document.location='registration.php'" class="btn btn-success ">Zarejestruj się</button></div>
+								<div class="submit"><button type="button" onclick="document.location='registration'" class="btn btn-success ">Zarejestruj się</button></div>
 							</form>
 						</div>
 					</div>

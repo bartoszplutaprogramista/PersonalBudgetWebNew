@@ -1,0 +1,17 @@
+### PROTECT FILES ###
+<FilesMatch "\.(htaccess|htpasswd|ini|fla|psd|log|sh)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+RewriteEngine on
+RewriteRule add-expense addExpense.php
+RewriteRule add-income addIncome.php
+RewriteRule browse-selected-period-from-to browseProcessingSelectedPeriod.php
+RewriteRule browse-selected-period browseSelectedPeriod.php
+RewriteRule browse-the-balance browseTheBalance.php
+RewriteRule display-selected-period displaySelectedPeriod.php
+RewriteRule personal-budget index.php
+RewriteRule home personalBudget.php 
+RewriteRule registration registration.php
+RewriteRule welcome welcome.php

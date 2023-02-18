@@ -2,7 +2,7 @@
     session_start();
 
     if((!isset($_POST['username'])) || (!isset($_POST['password']))){
-        header('Location: index.php');
+        header('Location: personal-budget');
         exit();
     }
 
@@ -34,14 +34,14 @@
                     $_SESSION['userName'] = $username;
                     $_SESSION['loggedIn'] = true;
                     unset($_SESSION['error']);
-                    header('Location: personalBudget.php');
+                    header('Location: home');
                 } else {
                     $_SESSION['error'] = 'Nieprawidłowy login lub hasło!';
-                    header('Location: index.php');
+                    header('Location: personal-budget');
                 }
             } else {
                 $_SESSION['error'] = 'Nieprawidłowy login lub hasło!';
-                header('Location: index.php');
+                header('Location: personal-budget');
             }
 
         } catch (PDOException $err){
