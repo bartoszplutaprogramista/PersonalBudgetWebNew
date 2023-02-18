@@ -1,3 +1,13 @@
+<?php
+
+	session_start();
+
+	if ((!isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn']==false)){
+		header('Location: personal-budget');
+		exit();
+	}
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -9,7 +19,7 @@
 	<meta name="description" content="Aplikacja Budżet osobisty pomoże Ci w zarządzaniu swoimi wydatkami">
 	<meta name="keywords" content="budżet osobisty, wydatki, przychody, zarządzaj swoimi wydatkami">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/style1.css" type="text/css">
 	<link rel="stylesheet" href="css/fontello.css" type="text/css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
@@ -21,14 +31,19 @@
 	
 	<div class="container-fluid">
 		<header>
-			<div class="row justify-content-center m-0 p-0">
+			<div class="row justify-content-center m-0 mb-2 p-0">
 				<div class="col-xl-12 col-xxl-9">
-					<div class="p-4 mt-5">
-						<h1><i class="icon-dollar-1"></i>BUDŻET OSOBISTY</h1>
-						<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
+					<div class="p-0 mt-5 dispaly-as-flex">
+							<div class="text-center"><i class="icon-dollar-1"></i></div>
+							<div><h1>BUDŻET OSOBISTY</h1></div>
 					</div>
+					<p class="bo">Aplikacja do zarządzania budżetem osobistym</p>
 				</div>
 			</div>
+			<div class="row class-center col-xl-12 col-xxl-9 p-0"><p class="display-right">Witaj 
+			<?php 
+				echo $_SESSION['userName'];
+			?></p></div>
 			<div class="row justify-content-center m-0 p-0">
 				<nav class="navbar navbar-expand-xl col-xl-12 col-xxl-9 navbar-light top-bar p-0">
 					<div class="container-fluid padding-991"> 
@@ -39,16 +54,16 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="personalBudget.html"><i class="icon-home"></i>Strona główna</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="home"><i class="icon-home"></i>Strona główna</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addIncome.html"><i class="icon-dollar"></i>Dodaj przychód</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-income"><i class="icon-dollar"></i>Dodaj przychód</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="addExpense.html"><i class="icon-basket"></i>Dodaj wydatek</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="add-expense"><i class="icon-basket"></i>Dodaj wydatek</a>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link text-light py-3" href="browseTheBalance.html"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
+									<a class="nav-link text-light py-3" href="browse-the-balance"><i class="icon-chart-bar"></i>Przeglądaj bilans</a>
 								</li>
 								<li class="nav-item dropdown li-change-color">
 									<a class="nav-link dropdown-toggle text-light py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,7 +75,7 @@
 									</ul>
 								</li>
 								<li class="nav-item li-change-color">
-									<a class="nav-link active text-light py-3" aria-current="page" href="index.html"><i class="icon-logout-1"></i>Wyloguj się</a>
+									<a class="nav-link active text-light py-3" aria-current="page" href="logOut.php"><i class="icon-logout-1"></i>Wyloguj się</a>
 								</li>
 							</ul>
 						</div>
@@ -72,26 +87,12 @@
 			<article>
 				<div class="row justify-content-center m-0 p-0">
 					<div class="col-xl-12 col-xxl-9 p-0">
-						<div class="content mt-2 p-4">	
-							<h3>PRZEGLĄDAJ BILANS</h3>
-							<form action="#" method="post">
-								<div class="d-flex flex-row bd-highlight div-balance-buttons mx-auto p-2">
-									<div class="bd-highlight balance-width">
-										<label class="p-input-radio mb-2 mt-1 w-100" for="paymentMethod">Wybierz okres czasu:</label>
-									</div>
-									<div class="bd-highlight balance-width">
-										<select class="form-select form-select-sm mb-0 mt-1" aria-label="sposob platnosci" name="paymentMethod" id="paymentMethod">
-											<option value="remuneration">Bieżący miesiąc</option>
-											<option value="interest">Poprzedni miesiąc</option>
-											<option value="allegro">Bieżący rok</option>
-											<option value="allegro">Wybrany okres</option>
-										</select> 
-									</div>
-									<div class="bd-highlight balance-width submit2 small-text">
-										<button type="submit" class="btn btn-warning">Przeglądaj</button>
-									</div>
-								</div>
-							</form>
+						<div class="content mt-2 p-4">
+							<h2>Aplikacja Budżet Osobisty</h2>
+							<p class="p-content p-2">Budżet Osobisty pozwala na analizę tego jakie mamy przychody np. związane z wynagrodzeniem, stypendium itd. oraz ile pieniędzy wydajemy na poszczególne rzeczy: opłaty związane z mieszkaniem, kredytami, jedzeniem, rozrywką, remontami, wakacjami, ubezpieczeniami. Dzięki tej analizie łatwiej jest nam zaoszczędzić pieniądze na nowy cel. np samochód. </p>
+							
+							<h2 class="mt-2">Jak działa Aplikacja Budżet Osobisty?</h2>
+							<p class="p-content p-2">Mamy do wyboru 4 główne opcje w aplikacji: dodaj przychód (możemy dodać np.: wynagrodzenie, odsetki bankowe, sprzedaż na allegro, inne), dodaj wydatek (możemy dodać: sposób płatności: gotówką, kartą debetową, kartą kredytową w następujących kategoriach: jedzenie, mieszkanie, transport, telekomunikacja, opieka zdrowotna itp.), przeglądaj bilans (tutaj zaprezentowane jest podsumowanie przychodów oraz wydatków w danym okresie dla danych kategorii) oraz ustawienia gdzie możemy zmienić: adres e-mail lub hasło.</p>	
 						</div>
 					</div>
 				</div>
@@ -101,7 +102,7 @@
 			<div class="row justify-content-center m-0 p-0">	
 				<div class="col-xl-12 col-xxl-9">
 					<div class="p-2">
-						<p>Wszelkie prawa zastrzeżone &copy; 2022 Dziękuję za wizytę!</p>
+						<p>Wszelkie prawa zastrzeżone &copy; 2023 Dziękuję za wizytę!</p>
 					</div>
 				</div>
 			</div>
@@ -109,7 +110,6 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="src/script.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
