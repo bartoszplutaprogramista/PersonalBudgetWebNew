@@ -45,6 +45,21 @@
 
 		$queryExpense = $queryNameExpense->fetchAll();
 
+		$querySumIncomes = $db->prepare('SELECT SUM(amount) AS incSum FROM incomes WHERE user_id = :userId AND date_of_income LIKE :dataHelpCurrentMonth');
+		$querySumIncomes->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumIncomes->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
+		$querySumIncomes->execute();
+
+		$incomesSum = $querySumIncomes->fetch();
+
+		$querySumExpenses = $db->prepare('SELECT SUM(amount) AS expSum FROM expenses WHERE user_id = :userId AND date_of_expense LIKE :dataHelpCurrentMonth');
+		$querySumExpenses->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumExpenses->bindValue(':dataHelpCurrentMonth', $dataHelpCurrentMonth, PDO::PARAM_STR);
+		$querySumExpenses->execute();
+
+		$expensesSum = $querySumExpenses->fetch();
+
+
 
 	} elseif ($paymentMethod=='lastMonth'){
 
@@ -79,6 +94,21 @@
 		$queryNameExpense->execute();
 
 		$queryExpense = $queryNameExpense->fetchAll();
+
+		$querySumIncomes = $db->prepare('SELECT SUM(amount) AS incSum FROM incomes WHERE user_id = :userId AND date_of_income LIKE :dataHelpLastMonth');
+		$querySumIncomes->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumIncomes->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
+		$querySumIncomes->execute();
+
+		$incomesSum = $querySumIncomes->fetch();
+
+		$querySumExpenses = $db->prepare('SELECT SUM(amount) AS expSum FROM expenses WHERE user_id = :userId AND date_of_expense LIKE :dataHelpLastMonth');
+		$querySumExpenses->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumExpenses->bindValue(':dataHelpLastMonth', $fullDateLastMonth, PDO::PARAM_STR);
+		$querySumExpenses->execute();
+
+		$expensesSum = $querySumExpenses->fetch();
+
 	} elseif ($paymentMethod=='currentYear'){
 
 		$dateFromTo = 	$dateCurrentYear."-01-01 do ".$currentDate;
@@ -107,6 +137,21 @@
 		$queryNameExpense->execute();
 
 		$queryExpense = $queryNameExpense->fetchAll();
+
+		$querySumIncomes = $db->prepare('SELECT SUM(amount) AS incSum FROM incomes WHERE user_id = :userId AND date_of_income LIKE :dataHelpCurrentYear');
+		$querySumIncomes->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumIncomes->bindValue(':dataHelpCurrentYear', $fullDateCurrentYear, PDO::PARAM_STR);
+		$querySumIncomes->execute();
+
+		$incomesSum = $querySumIncomes->fetch();
+
+		$querySumExpenses = $db->prepare('SELECT SUM(amount) AS expSum FROM expenses WHERE user_id = :userId AND date_of_expense LIKE :dataHelpCurrentYear');
+		$querySumExpenses->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+		$querySumExpenses->bindValue(':dataHelpCurrentYear', $fullDateCurrentYear, PDO::PARAM_STR);
+		$querySumExpenses->execute();
+
+		$expensesSum = $querySumExpenses->fetch();
+
 	} else {
 		header('Location: browse-selected-period-from-to');
 	}
@@ -273,7 +318,36 @@
 										?>
 									</tbody>
 								</table>
-							</div>                            
+							</div>  
+							<div class="table-responsive mt-4">
+								<table class="table-center">
+									<thead>
+										<tr><th>Suma przychodów i wydatków w okresie od 	
+											<?php 
+												echo $dateFromTo;
+											?>			
+										</th></tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><p>Suma przychodów: <b>
+												<?php 
+													if($queryNameIncome->rowCount()>0)
+													echo $incomesSum['incSum'];
+													else echo "0";
+												?> zł</b></p></td>
+										</tr>
+										<tr>
+											<td><p>Suma wydatków: <b>
+												<?php
+													if($queryNameExpense->rowCount()>0) echo $expensesSum['expSum'];
+													else echo "0";
+												?> zł</b></p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>							
 						</div>
 					</div>
 				</div>
