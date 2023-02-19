@@ -19,23 +19,41 @@
 
 	$queryName = $queryNameSelectedPeriod->fetchAll();
 	
-		$queryNameSelectedPeriodExpense = $db->prepare('SELECT 
-		ex.amount AS amn,
-		ex.date_of_expense AS dateExp,
-		pay.name AS pay,
-		exCat.name AS excategory,
-		ex.expense_comment AS comment
-		FROM expenses_category_assigned_to_users AS exCat 
-		INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
-		INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
-		WHERE ex.user_id = :userId AND date_of_expense >= :dateSelectedPeriod1 AND date_of_expense <= :dateSelectedPeriod2
-		ORDER BY date_of_expense ASC');
-		$queryNameSelectedPeriodExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-		$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
-		$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
-		$queryNameSelectedPeriodExpense->execute();
+	$queryNameSelectedPeriodExpense = $db->prepare('SELECT 
+	ex.amount AS amn,
+	ex.date_of_expense AS dateExp,
+	pay.name AS pay,
+	exCat.name AS excategory,
+	ex.expense_comment AS comment
+	FROM expenses_category_assigned_to_users AS exCat 
+	INNER JOIN expenses AS ex ON exCat.id = ex.expense_category_assigned_to_user_id 
+	INNER JOIN payment_methods_assigned_to_users AS pay ON ex.payment_method_assigned_to_user_id = pay.id
+	WHERE ex.user_id = :userId AND date_of_expense >= :dateSelectedPeriod1 AND date_of_expense <= :dateSelectedPeriod2
+	ORDER BY date_of_expense ASC');
+	$queryNameSelectedPeriodExpense->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+	$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
+	$queryNameSelectedPeriodExpense->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
+	$queryNameSelectedPeriodExpense->execute();
 
-		$queryExpensePeriod = $queryNameSelectedPeriodExpense->fetchAll();
+	$queryExpensePeriod = $queryNameSelectedPeriodExpense->fetchAll();
+
+//	$queryExpense = $queryNameExpense->fetchAll();
+
+	$querySumIncomes = $db->prepare('SELECT SUM(amount) AS incSum FROM incomes WHERE user_id = :userId AND date_of_income >= :dateSelectedPeriod1 AND date_of_income <= :dateSelectedPeriod2');
+	$querySumIncomes->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+	$querySumIncomes->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
+	$querySumIncomes->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
+	$querySumIncomes->execute();
+
+	$incomesSum = $querySumIncomes->fetch();
+
+	$querySumExpenses = $db->prepare('SELECT SUM(amount) AS expSum FROM expenses WHERE user_id = :userId AND date_of_expense >= :dateSelectedPeriod1 AND date_of_expense <= :dateSelectedPeriod2');
+	$querySumExpenses->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+	$querySumExpenses->bindValue(':dateSelectedPeriod1', $dateSelectedPeriod1, PDO::PARAM_STR);
+	$querySumExpenses->bindValue(':dateSelectedPeriod2', $dateSelectedPeriod2, PDO::PARAM_STR);
+	$querySumExpenses->execute();
+
+	$expensesSum = $querySumExpenses->fetch();
 
 ?>
 <!DOCTYPE HTML>
@@ -192,7 +210,35 @@
 										?>
 									</tbody>
 								</table>
-							</div>                          
+							</div> 
+							<div class="table-responsive mt-4">
+								<table class="table-center">
+									<thead>
+										<tr><th>Suma przychodów i wydatków w okresie od 	
+											<?= $dateSelectedPeriod1." do ".$dateSelectedPeriod2; 
+											?>		
+										</th></tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><p>Suma przychodów: <b>
+												<?php 
+													if($queryNameSelectedPeriod->rowCount()>0)
+													echo $incomesSum['incSum'];
+													else echo "0";
+												?> zł</b></p></td>
+										</tr>
+										<tr>
+											<td><p>Suma wydatków: <b>
+												<?php
+													if($queryNameSelectedPeriodExpense->rowCount()>0) echo $expensesSum['expSum'];
+													else echo "0";
+												?> zł</b></p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>	                         
 						</div>
 					</div>
 				</div>
