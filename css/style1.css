@@ -8,36 +8,11 @@ body
 	margin: 0 !important;
 }
 
-/*
-.black-color
-{
-	background-color: #000;
-}
-
-.gray-color
-{
-	background-color: #373737;
-} */
-
 .table-center
 {
 	margin-left: auto;
 	margin-right: auto;
 }
-
-/*
-.table{
-	display: block !important;
-	overflow-x: auto !important;
-	width: 100% !important;
-  } */
-
-/*
-.css-s1 tr:nth-child(2n+1) 
-{
-    background: #373737;
-    padding: 10px;
-} */
 
 .p-bold
 {
@@ -68,13 +43,6 @@ tr:nth-child(odd)
 {
 	background-color: #373737;
 }
-
-/*
-td, th
-{
-	border: 1px solid #FFF;
-	padding: 10px;
-} */
 
 .dispaly-as-flex
 {
@@ -216,11 +184,6 @@ a:active {
 	padding: 0;
 } 
 
-/* .sum
-{
-	width: 300px;
-} */
-
 p
 {
 	color: white;
@@ -293,7 +256,6 @@ h3
 
 .submit2
 {
-/*	text-align: center; */
 	margin-left: 10px;
 }
 
@@ -302,14 +264,6 @@ h3
 	width: 100%;
 	text-align: center;
 }
-
-/*
-.error-info-my
-{
-	color: red;
-	margin-top: 0;
-	margin-bottom: 0;
-}  */
 
 @media (min-width: 1900px)
 {
